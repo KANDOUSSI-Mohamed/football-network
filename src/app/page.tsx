@@ -1,31 +1,9 @@
 import { clubs, players } from "@/lib/demo-data";
-import { hasSupabaseConfig } from "@/lib/supabase";
+import { AppShell } from "@/components/app-shell";
 
 export default function Home() {
   return (
-    <div className="shell">
-      <aside className="sidebar">
-        <div className="brand">
-          <strong>Football Network</strong>
-          <span>Professional football platform</span>
-        </div>
-
-        <nav className="nav" aria-label="Navigation principale">
-          <a className="active" href="/">
-            Vue generale
-          </a>
-          <a href="/players">Joueurs</a>
-          <a href="/clubs">Clubs</a>
-          <a href="/opportunities">Recrutement</a>
-          <a href="/messages">Messages</a>
-        </nav>
-
-        <div className="muted">
-          Supabase : {hasSupabaseConfig ? "connecte" : "a connecter"}
-        </div>
-      </aside>
-
-      <main className="main">
+    <AppShell active="overview">
         <div className="topbar">
           <input
             className="search"
@@ -144,7 +122,6 @@ export default function Home() {
             </div>
           </section>
         </div>
-      </main>
-    </div>
+    </AppShell>
   );
 }

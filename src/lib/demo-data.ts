@@ -14,6 +14,8 @@ export type Player = {
     goals: number;
     assists: number;
   };
+  completion: number;
+  visibility: string;
 };
 
 export type Club = {
@@ -24,6 +26,27 @@ export type Club = {
   division: string;
   status: string;
   needs: string[];
+};
+
+export type Opportunity = {
+  id: string;
+  title: string;
+  club: string;
+  country: string;
+  city: string;
+  level: string;
+  position: string;
+  status: string;
+  deadline: string;
+};
+
+export type Conversation = {
+  id: string;
+  contact: string;
+  role: string;
+  subject: string;
+  lastMessage: string;
+  status: string;
 };
 
 export const players: Player[] = [
@@ -42,7 +65,9 @@ export const players: Player[] = [
       matches: 24,
       goals: 14,
       assists: 5
-    }
+    },
+    completion: 78,
+    visibility: "Profil public"
   },
   {
     id: "p2",
@@ -59,7 +84,9 @@ export const players: Player[] = [
       matches: 29,
       goals: 6,
       assists: 11
-    }
+    },
+    completion: 84,
+    visibility: "Visible recruteurs"
   },
   {
     id: "p3",
@@ -76,7 +103,9 @@ export const players: Player[] = [
       matches: 21,
       goals: 0,
       assists: 1
-    }
+    },
+    completion: 71,
+    visibility: "Relations et clubs"
   }
 ];
 
@@ -110,3 +139,65 @@ export const clubs: Club[] = [
   }
 ];
 
+export const opportunities: Opportunity[] = [
+  {
+    id: "o1",
+    title: "Recherche attaquant U23 disponible",
+    club: "CODM Meknes",
+    country: "Maroc",
+    city: "Meknes",
+    level: "Botola Pro",
+    position: "Avant-centre",
+    status: "Ouvert",
+    deadline: "30 juin 2026"
+  },
+  {
+    id: "o2",
+    title: "Essai gardien senior",
+    club: "Club National 3",
+    country: "France",
+    city: "Nantes",
+    level: "National 3",
+    position: "Gardien",
+    status: "Candidatures",
+    deadline: "15 juillet 2026"
+  },
+  {
+    id: "o3",
+    title: "Analyste video pour equipe premiere",
+    club: "Academie internationale",
+    country: "France",
+    city: "Paris",
+    level: "Academie",
+    position: "Staff",
+    status: "Premium club",
+    deadline: "Ouvert"
+  }
+];
+
+export const conversations: Conversation[] = [
+  {
+    id: "m1",
+    contact: "Responsable recrutement",
+    role: "Club",
+    subject: "Demande de video complete",
+    lastMessage: "Le club souhaite consulter le match complet du 12 mai.",
+    status: "A traiter"
+  },
+  {
+    id: "m2",
+    contact: "Agent verifie",
+    role: "Agent",
+    subject: "Representation joueur",
+    lastMessage: "Proposition de rendez-vous pour discuter du projet sportif.",
+    status: "Nouveau"
+  },
+  {
+    id: "m3",
+    contact: "Scout independant",
+    role: "Recruteur",
+    subject: "Short-list ete 2026",
+    lastMessage: "Profil ajoute a une liste de suivi.",
+    status: "Lu"
+  }
+];
