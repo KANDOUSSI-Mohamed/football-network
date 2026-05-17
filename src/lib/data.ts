@@ -32,12 +32,12 @@ export async function getPlayers(): Promise<Player[]> {
       id: player.id,
       name: player.profiles?.display_name ?? "Joueur",
       age: 0,
-      position: player.primary_position ?? "Poste a renseigner",
-      foot: player.preferred_foot ?? "Non renseigne",
-      height: player.height_cm ? `${player.height_cm / 100} m` : "Non renseigne",
-      country: "A renseigner",
-      city: player.profiles?.city ?? "A renseigner",
-      club: player.clubs?.official_name ?? "Libre / non renseigne",
+      position: player.primary_position ?? "Poste à renseigner",
+      foot: player.preferred_foot ?? "Non renseigné",
+      height: player.height_cm ? `${player.height_cm / 100} m` : "Non renseigné",
+      country: "À renseigner",
+      city: player.profiles?.city ?? "À renseigner",
+      club: player.clubs?.official_name ?? "Libre / non renseigné",
       status: formatAvailability(player.availability_status),
       stats: {
         matches: stats?.appearances ?? 0,
@@ -68,13 +68,13 @@ export async function getClubs(): Promise<Club[]> {
   return data.map((club: any) => ({
     id: club.id,
     name: club.official_name,
-    country: club.countries?.name ?? "A renseigner",
-    city: club.city ?? "A renseigner",
+    country: club.countries?.name ?? "À renseigner",
+    city: club.city ?? "À renseigner",
     division: formatClubStatus(club.club_status),
     status:
       club.claim_status === "claimed"
-        ? "Fiche revendiquee"
-        : "Fiche publique non revendiquee",
+        ? "Fiche revendiquée"
+        : "Fiche publique non revendiquée",
     needs: ["Recrutement", "Scouting", "Profil club"]
   }));
 }
@@ -98,10 +98,10 @@ export async function getOpportunities(): Promise<Opportunity[]> {
     id: opportunity.id,
     title: opportunity.title,
     club: "Organisation",
-    country: opportunity.countries?.name ?? "A renseigner",
-    city: opportunity.city ?? "A renseigner",
-    level: opportunity.level ?? "A renseigner",
-    position: opportunity.position ?? "A renseigner",
+    country: opportunity.countries?.name ?? "À renseigner",
+    city: opportunity.city ?? "À renseigner",
+    level: opportunity.level ?? "À renseigner",
+    position: opportunity.position ?? "À renseigner",
     status: opportunity.status ?? "open",
     deadline: opportunity.deadline ?? "Ouvert"
   }));
@@ -126,12 +126,12 @@ function formatAvailability(status?: string) {
   const labels: Record<string, string> = {
     available_now: "Disponible maintenant",
     available_end_of_season: "Disponible fin de saison",
-    open_to_opportunities: "Ouvert aux opportunites",
+    open_to_opportunities: "Ouvert aux opportunités",
     not_available: "Non disponible",
-    unknown: "Disponibilite a renseigner"
+    unknown: "Disponibilité à renseigner"
   };
 
-  return labels[status ?? "unknown"] ?? status ?? "Disponibilite a renseigner";
+  return labels[status ?? "unknown"] ?? status ?? "Disponibilité à renseigner";
 }
 
 function formatClubStatus(status?: string) {
@@ -139,11 +139,11 @@ function formatClubStatus(status?: string) {
     professional: "Professionnel",
     semi_professional: "Semi-professionnel",
     amateur: "Amateur",
-    academy: "Academie",
-    school: "Ecole",
+    academy: "Académie",
+    school: "École",
     association: "Association",
-    unknown: "Statut a renseigner"
+    unknown: "Statut à renseigner"
   };
 
-  return labels[status ?? "unknown"] ?? status ?? "Statut a renseigner";
+  return labels[status ?? "unknown"] ?? status ?? "Statut à renseigner";
 }

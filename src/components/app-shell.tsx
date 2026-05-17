@@ -6,7 +6,7 @@ type AppShellProps = {
 };
 
 const navItems = [
-  { key: "overview", href: "/", label: "Vue generale" },
+  { key: "overview", href: "/", label: "Vue générale" },
   { key: "players", href: "/players", label: "Joueurs" },
   { key: "clubs", href: "/clubs", label: "Clubs" },
   { key: "opportunities", href: "/opportunities", label: "Recrutement" },
@@ -19,7 +19,7 @@ export function AppShell({ active, children }: AppShellProps) {
       <aside className="sidebar">
         <div className="brand">
           <strong>Football Network</strong>
-          <span>Professional football platform</span>
+          <span>Plateforme professionnelle du football</span>
         </div>
 
         <nav className="nav" aria-label="Navigation principale">
@@ -35,7 +35,7 @@ export function AppShell({ active, children }: AppShellProps) {
         </nav>
 
         <div className="muted">
-          Supabase : {hasSupabaseConfig ? "connecte" : "a connecter"}
+          Supabase : {hasSupabaseConfig ? "connecté" : "à connecter"}
         </div>
       </aside>
 

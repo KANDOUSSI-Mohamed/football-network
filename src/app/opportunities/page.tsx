@@ -9,16 +9,16 @@ export default async function OpportunitiesPage() {
       <div className="topbar">
         <input
           className="search"
-          placeholder="Rechercher une opportunite, un poste, un pays..."
-          aria-label="Recherche opportunites"
+          placeholder="Rechercher une opportunité, un poste, un pays..."
+          aria-label="Recherche opportunités"
         />
-        <button className="button">Publier une opportunite</button>
+        <button className="button">Publier une opportunité</button>
       </div>
 
       <section className="page-heading">
         <div>
           <div className="eyebrow">Recrutement</div>
-          <h1>Opportunites clubs, essais et missions football</h1>
+          <h1>Opportunités clubs, essais et missions football</h1>
           <p>
             Ce module structure les besoins des clubs, les candidatures et le
             futur pipeline de recrutement.

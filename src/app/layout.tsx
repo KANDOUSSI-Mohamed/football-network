@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Football Network",
-  description: "Le reseau professionnel mondial du football"
+  description: "Le réseau professionnel mondial du football"
 };
 
 export default function RootLayout({
@@ -17,4 +17,3 @@ export default function RootLayout({
     </html>
   );
 }
-

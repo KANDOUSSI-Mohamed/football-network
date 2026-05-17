@@ -21,7 +21,7 @@ export default async function PlayersPage() {
           <h1>Recherche et valorisation des profils joueurs</h1>
           <p>
             Le recruteur doit pouvoir identifier rapidement les joueurs par
-            poste, disponibilite, pays, statut contractuel et niveau de profil.
+            poste, disponibilité, pays, statut contractuel et niveau de profil.
           </p>
         </div>
       </section>
@@ -39,7 +39,7 @@ export default async function PlayersPage() {
           <option>Maroc</option>
         </select>
         <select>
-          <option>Disponibilite</option>
+          <option>Disponibilité</option>
           <option>Disponible maintenant</option>
           <option>Disponible fin de saison</option>
         </select>
@@ -66,7 +66,7 @@ export default async function PlayersPage() {
               <span className="tag">{player.status}</span>
             </div>
             <div className="completion">
-              <span>Profil complete a {player.completion}%</span>
+              <span>Profil complété à {player.completion}%</span>
               <div>
                 <i style={{ width: `${player.completion}%` }} />
               </div>

@@ -9,28 +9,28 @@ export default async function Home() {
         <div className="topbar">
           <input
             className="search"
-            placeholder="Rechercher joueur, club, agent, recruteur..."
+            placeholder="Rechercher un joueur, un club, un agent, un recruteur..."
             aria-label="Recherche"
           />
-          <button className="button">Creer un profil</button>
+          <button className="button">Créer un profil</button>
         </div>
 
         <section className="hero">
           <div className="hero-panel">
             <div>
-              <div className="eyebrow">Reseau professionnel mondial du football</div>
+              <div className="eyebrow">Réseau professionnel mondial du football</div>
               <h1>Connecter joueurs, clubs, agents, recruteurs et staffs.</h1>
               <p>
-                Une base mondiale structuree pour rendre les profils visibles,
-                faciliter le recrutement, verifier les acteurs et creer des
-                opportunites dans tout l'ecosysteme football.
+                Une base mondiale structurée pour rendre les profils visibles,
+                faciliter le recrutement, vérifier les acteurs et créer des
+                opportunités dans tout l'écosystème football.
               </p>
             </div>
 
             <div className="metrics">
               <div className="metric">
                 <strong>{players.length}</strong>
-                <span>profils joueurs demo</span>
+                <span>profils joueurs</span>
               </div>
               <div className="metric">
                 <strong>{clubs.length}</strong>
@@ -44,22 +44,22 @@ export default async function Home() {
           </div>
 
           <div className="panel">
-            <h2>Priorites MVP</h2>
+            <h2>Priorités MVP</h2>
             <div className="tag-row">
               <span className="tag">Profil joueur</span>
               <span className="tag">Recherche</span>
               <span className="tag">Pages clubs</span>
-              <span className="tag">Opportunites</span>
+              <span className="tag">Opportunités</span>
               <span className="tag">Messagerie</span>
               <span className="tag">Premium</span>
-              <span className="tag">Verification</span>
+              <span className="tag">Vérification</span>
             </div>
           </div>
         </section>
 
         <div className="sections">
           <section className="section">
-            <h2>Joueurs a mettre en avant</h2>
+            <h2>Joueurs à mettre en avant</h2>
             <div className="grid">
               {players.map((player) => (
                 <article className="card" key={player.id}>
@@ -97,6 +97,41 @@ export default async function Home() {
                   </div>
                 </article>
               ))}
+            </div>
+          </section>
+
+          <section className="section">
+            <h2>Fil réseau</h2>
+            <div className="feed-layout">
+              <article className="post-card">
+                <div className="post-author">
+                  <div className="avatar">Y</div>
+                  <div>
+                    <strong>Yanis Benali</strong>
+                    <span>Avant-centre - Disponible maintenant</span>
+                  </div>
+                </div>
+                <p>
+                  Nouvelle vidéo ajoutée : appels en profondeur, finition pied
+                  droit et jeu dos au but. Profil ouvert aux clubs et recruteurs
+                  vérifiés.
+                </p>
+                <div className="media-preview">
+                  <span>Highlight vidéo</span>
+                </div>
+                <div className="post-actions">
+                  <button>Recommander</button>
+                  <button>Ajouter à une short-list</button>
+                  <button>Contacter</button>
+                </div>
+              </article>
+
+              <aside className="signal-panel">
+                <h3>Notifications</h3>
+                <span>2 demandes de relation</span>
+                <span>1 club a consulté un profil</span>
+                <span>3 opportunités correspondent à vos critères</span>
+              </aside>
             </div>
           </section>
 

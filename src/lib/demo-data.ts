@@ -78,8 +78,8 @@ export const players: Player[] = [
     height: "1.78 m",
     country: "Maroc",
     city: "Casablanca",
-    club: "Academie privee",
-    status: "Ouvert aux opportunites",
+    club: "Académie privée",
+    status: "Ouvert aux opportunités",
     stats: {
       matches: 29,
       goals: 6,
@@ -116,17 +116,17 @@ export const clubs: Club[] = [
     country: "France",
     city: "Lyon",
     division: "Ligue 1",
-    status: "Fiche publique non revendiquee",
-    needs: ["U19", "Scouting", "Milieu defensif"]
+    status: "Fiche publique non revendiquée",
+    needs: ["U19", "Scouting", "Milieu défensif"]
   },
   {
     id: "c2",
-    name: "CODM Meknes",
+    name: "CODM Meknès",
     country: "Maroc",
-    city: "Meknes",
+    city: "Meknès",
     division: "Botola Pro",
-    status: "Fiche publique non revendiquee",
-    needs: ["Attaquant", "Analyse video", "U23"]
+    status: "Fiche publique non revendiquée",
+    needs: ["Attaquant", "Analyse vidéo", "U23"]
   },
   {
     id: "c3",
@@ -134,8 +134,8 @@ export const clubs: Club[] = [
     country: "France",
     city: "Nantes",
     division: "Ligue 1",
-    status: "Fiche publique non revendiquee",
-    needs: ["Academie", "Recrutement jeunes", "Gardien"]
+    status: "Fiche publique non revendiquée",
+    needs: ["Académie", "Recrutement jeunes", "Gardien"]
   }
 ];
 
@@ -143,9 +143,9 @@ export const opportunities: Opportunity[] = [
   {
     id: "o1",
     title: "Recherche attaquant U23 disponible",
-    club: "CODM Meknes",
+    club: "CODM Meknès",
     country: "Maroc",
-    city: "Meknes",
+    city: "Meknès",
     level: "Botola Pro",
     position: "Avant-centre",
     status: "Ouvert",
@@ -164,11 +164,11 @@ export const opportunities: Opportunity[] = [
   },
   {
     id: "o3",
-    title: "Analyste video pour equipe premiere",
-    club: "Academie internationale",
+    title: "Analyste vidéo pour équipe première",
+    club: "Académie internationale",
     country: "France",
     city: "Paris",
-    level: "Academie",
+    level: "Académie",
     position: "Staff",
     status: "Premium club",
     deadline: "Ouvert"
@@ -180,24 +180,24 @@ export const conversations: Conversation[] = [
     id: "m1",
     contact: "Responsable recrutement",
     role: "Club",
-    subject: "Demande de video complete",
+    subject: "Demande de vidéo complète",
     lastMessage: "Le club souhaite consulter le match complet du 12 mai.",
-    status: "A traiter"
+    status: "À traiter"
   },
   {
     id: "m2",
-    contact: "Agent verifie",
+    contact: "Agent vérifié",
     role: "Agent",
-    subject: "Representation joueur",
+    subject: "Représentation joueur",
     lastMessage: "Proposition de rendez-vous pour discuter du projet sportif.",
     status: "Nouveau"
   },
   {
     id: "m3",
-    contact: "Scout independant",
+    contact: "Scout indépendant",
     role: "Recruteur",
-    subject: "Short-list ete 2026",
-    lastMessage: "Profil ajoute a une liste de suivi.",
+    subject: "Short-list été 2026",
+    lastMessage: "Profil ajouté à une liste de suivi.",
     status: "Lu"
   }
 ];

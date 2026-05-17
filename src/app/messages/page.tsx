@@ -16,10 +16,10 @@ export default function MessagesPage() {
       <section className="page-heading">
         <div>
           <div className="eyebrow">Messagerie interne</div>
-          <h1>Contacts professionnels et demandes controlees</h1>
+          <h1>Contacts professionnels et demandes contrôlées</h1>
           <p>
-            La messagerie doit proteger les joueurs contre le spam tout en
-            donnant aux clubs, agents et recruteurs des echanges serieux.
+            La messagerie doit protéger les joueurs contre le spam tout en
+            donnant aux clubs, agents et recruteurs des échanges sérieux.
           </p>
         </div>
       </section>
@@ -39,12 +39,12 @@ export default function MessagesPage() {
           ))}
         </div>
         <div className="panel">
-          <h2>Regles de contact</h2>
+          <h2>Règles de contact</h2>
           <div className="check-list">
-            <span>Coordonnees masquees par defaut</span>
-            <span>Demandes directes limitees</span>
+            <span>Coordonnées masquées par défaut</span>
+            <span>Demandes directes limitées</span>
             <span>Signalement et blocage disponibles</span>
-            <span>Priorite aux comptes verifies</span>
+            <span>Priorité aux comptes vérifiés</span>
           </div>
         </div>
       </section>

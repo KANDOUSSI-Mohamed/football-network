@@ -20,7 +20,7 @@ export default async function ClubsPage() {
           <div className="eyebrow">Annuaire clubs</div>
           <h1>Pages clubs, academies et structures revendiquables</h1>
           <p>
-            Les clubs existent dans la base avant meme la creation d'un compte.
+            Les clubs existent dans la base avant même la création d'un compte.
             Ils peuvent ensuite revendiquer leur fiche et publier leurs besoins.
           </p>
         </div>
