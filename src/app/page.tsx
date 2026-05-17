@@ -1,7 +1,9 @@
-import { clubs, players } from "@/lib/demo-data";
 import { AppShell } from "@/components/app-shell";
+import { getDashboardData } from "@/lib/data";
 
-export default function Home() {
+export default async function Home() {
+  const { clubs, players } = await getDashboardData();
+
   return (
     <AppShell active="overview">
         <div className="topbar">

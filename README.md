@@ -26,6 +26,7 @@ Supabase permet de demarrer vite avec :
 
 - `database/schema.sql` : premier schema de base de donnees.
 - `database/seed.sql` : premieres donnees de test France / Maroc.
+- `database/seed-demo.sql` : donnees demo pour alimenter les ecrans MVP.
 - `docs/technical-decisions.md` : choix techniques initiaux.
 
 ## Lancement vise
@@ -39,4 +40,3 @@ Le MVP doit d'abord permettre :
 - demandes de relation ;
 - messagerie basique ;
 - opportunites de recrutement.
-

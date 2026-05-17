@@ -1,7 +1,9 @@
 import { AppShell } from "@/components/app-shell";
-import { players } from "@/lib/demo-data";
+import { getPlayers } from "@/lib/data";
 
-export default function PlayersPage() {
+export default async function PlayersPage() {
+  const players = await getPlayers();
+
   return (
     <AppShell active="players">
       <div className="topbar">
@@ -89,4 +91,3 @@ export default function PlayersPage() {
     </AppShell>
   );
 }
-

@@ -1,7 +1,9 @@
 import { AppShell } from "@/components/app-shell";
-import { opportunities } from "@/lib/demo-data";
+import { getOpportunities } from "@/lib/data";
 
-export default function OpportunitiesPage() {
+export default async function OpportunitiesPage() {
+  const opportunities = await getOpportunities();
+
   return (
     <AppShell active="opportunities">
       <div className="topbar">
@@ -48,4 +50,3 @@ export default function OpportunitiesPage() {
     </AppShell>
   );
 }
-

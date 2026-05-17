@@ -1,7 +1,9 @@
 import { AppShell } from "@/components/app-shell";
-import { clubs } from "@/lib/demo-data";
+import { getClubs } from "@/lib/data";
 
-export default function ClubsPage() {
+export default async function ClubsPage() {
+  const clubs = await getClubs();
+
   return (
     <AppShell active="clubs">
       <div className="topbar">
@@ -45,4 +47,3 @@ export default function ClubsPage() {
     </AppShell>
   );
 }
-
