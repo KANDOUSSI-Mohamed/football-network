@@ -1,13 +1,13 @@
 :root {
-  --bg: #f5f7f2;
+  --bg: #f3f2ef;
   --surface: #ffffff;
-  --surface-muted: #eef3ea;
-  --ink: #172019;
-  --muted: #667061;
-  --line: #dbe3d4;
-  --accent: #0f7b45;
-  --accent-strong: #095c33;
-  --blue: #1d5d9f;
+  --surface-muted: #f7f8f5;
+  --ink: #1f2520;
+  --muted: #667066;
+  --line: #d9ddd5;
+  --accent: #0a7a43;
+  --accent-strong: #07572f;
+  --blue: #0a66c2;
   --gold: #c58b19;
 }
 
@@ -37,60 +37,293 @@ select {
 
 .shell {
   min-height: 100vh;
+  background: var(--bg);
+}
+
+.network-topbar {
+  align-items: center;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
   display: grid;
-  grid-template-columns: 248px 1fr;
+  gap: 14px;
+  grid-template-columns: 48px minmax(220px, 360px) minmax(0, 1fr) auto;
+  min-height: 58px;
+  padding: 0 max(24px, calc((100vw - 1180px) / 2));
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
-.sidebar {
-  background: #102019;
-  color: #f7fbf4;
-  padding: 24px 18px;
+.brand-mark {
+  align-items: center;
+  background: var(--accent);
+  border-radius: 8px;
+  color: white;
   display: flex;
-  flex-direction: column;
-  gap: 24px;
+  font-weight: 900;
+  height: 38px;
+  justify-content: center;
+  width: 38px;
 }
 
-.brand {
+.global-search input {
+  background: #edf3f0;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  min-width: 0;
+  padding: 10px 14px;
+  width: 100%;
+}
+
+.top-nav {
+  align-items: center;
   display: flex;
-  flex-direction: column;
   gap: 4px;
+  justify-content: center;
 }
 
-.brand strong {
-  font-size: 20px;
+.top-nav a {
+  border-bottom: 3px solid transparent;
+  color: #4f5751;
+  font-size: 13px;
+  min-width: 82px;
+  padding: 18px 10px 15px;
+  text-align: center;
 }
 
-.brand span,
-.nav span,
+.top-nav a.active,
+.top-nav a:hover {
+  border-bottom-color: var(--ink);
+  color: var(--ink);
+}
+
+.top-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.top-actions button {
+  background: var(--surface-muted);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  cursor: pointer;
+  padding: 8px 12px;
+}
+
 .eyebrow,
 .muted {
   color: var(--muted);
 }
 
-.sidebar .muted,
-.sidebar .nav span {
-  color: #aab7a6;
-}
-
-.nav {
-  display: grid;
-  gap: 6px;
-}
-
-.nav a {
-  padding: 10px 12px;
-  border-radius: 8px;
-  color: #dce8d8;
-}
-
-.nav a.active,
-.nav a:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
-}
-
 .main {
-  padding: 28px;
+  margin: 0 auto;
+  max-width: 1180px;
+  padding: 20px 24px 40px;
+}
+
+.app-status {
+  align-items: center;
+  color: var(--muted);
+  display: flex;
+  font-size: 13px;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.app-status strong {
+  color: var(--ink);
+}
+
+.social-layout {
+  align-items: start;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 245px minmax(0, 1fr) 310px;
+}
+
+.left-rail,
+.right-rail,
+.center-feed {
+  display: grid;
+  gap: 14px;
+}
+
+.left-rail,
+.right-rail {
+  position: sticky;
+  top: 78px;
+}
+
+.profile-widget,
+.side-widget,
+.composer-card,
+.feed-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.profile-cover {
+  background:
+    linear-gradient(135deg, rgba(10, 122, 67, 0.85), rgba(10, 102, 194, 0.72)),
+    linear-gradient(45deg, #dfe8d8, #ffffff);
+  height: 72px;
+}
+
+.profile-body {
+  display: grid;
+  gap: 8px;
+  padding: 0 16px 16px;
+  text-align: center;
+}
+
+.profile-photo {
+  align-items: center;
+  background: var(--accent);
+  border: 3px solid white;
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  font-weight: 900;
+  height: 72px;
+  justify-content: center;
+  margin: -36px auto 0;
+  width: 72px;
+}
+
+.profile-body h2,
+.profile-body p,
+.side-widget h3 {
+  margin: 0;
+}
+
+.profile-body h2 {
+  font-size: 18px;
+}
+
+.profile-body p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.profile-stats {
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 8px;
+  margin-top: 8px;
+  padding-top: 12px;
+  text-align: left;
+}
+
+.profile-stats span {
+  color: var(--muted);
+  display: flex;
+  font-size: 13px;
+  justify-content: space-between;
+}
+
+.profile-stats strong {
+  color: var(--blue);
+}
+
+.side-widget {
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+}
+
+.side-widget h3 {
+  font-size: 16px;
+}
+
+.side-widget a,
+.side-widget span {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.side-widget a {
+  display: grid;
+  gap: 2px;
+}
+
+.side-widget a strong {
+  color: var(--ink);
+  font-size: 14px;
+}
+
+.side-widget a:hover {
+  color: var(--blue);
+}
+
+.composer-card {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+}
+
+.composer-line {
+  align-items: center;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 48px 1fr;
+}
+
+.composer-line button {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 13px 18px;
+  text-align: left;
+}
+
+.composer-actions {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.composer-actions button {
+  background: transparent;
+  border: 0;
+  border-radius: 8px;
+  color: #475149;
+  cursor: pointer;
+  font-weight: 700;
+  padding: 10px 8px;
+}
+
+.composer-actions button:hover {
+  background: var(--surface-muted);
+}
+
+.feed-card {
+  display: grid;
+  gap: 14px;
+  padding: 16px;
+}
+
+.football-media {
+  align-items: end;
+  aspect-ratio: 16 / 9;
+  background:
+    radial-gradient(circle at 25% 18%, rgba(255, 255, 255, 0.36), transparent 18%),
+    linear-gradient(135deg, #0f5130, #0a66c2 58%, #13251c);
+  border-radius: 8px;
+  color: white;
+  display: flex;
+  overflow: hidden;
+  padding: 18px;
+}
+
+.football-media div {
+  display: grid;
+  gap: 4px;
 }
 
 .topbar {
@@ -463,11 +696,26 @@ select {
 }
 
 @media (max-width: 980px) {
-  .shell {
+  .network-topbar {
+    grid-template-columns: 44px 1fr;
+    padding: 8px 14px;
+  }
+
+  .top-nav,
+  .top-actions,
+  .right-rail {
+    display: none;
+  }
+
+  .main {
+    padding: 14px;
+  }
+
+  .social-layout {
     grid-template-columns: 1fr;
   }
 
-  .sidebar {
+  .left-rail {
     position: static;
   }
 

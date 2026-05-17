@@ -2,163 +2,141 @@ import { AppShell } from "@/components/app-shell";
 import { getDashboardData } from "@/lib/data";
 
 export default async function Home() {
-  const { clubs, players } = await getDashboardData();
+  const { clubs, players, opportunities } = await getDashboardData();
+  const featuredPlayer = players[0];
 
   return (
     <AppShell active="overview">
-        <div className="topbar">
-          <input
-            className="search"
-            placeholder="Rechercher un joueur, un club, un agent, un recruteur..."
-            aria-label="Recherche"
-          />
-          <button className="button">Créer un profil</button>
-        </div>
-
-        <section className="hero">
-          <div className="hero-panel">
-            <div>
-              <div className="eyebrow">Réseau professionnel mondial du football</div>
-              <h1>Connecter joueurs, clubs, agents, recruteurs et staffs.</h1>
-              <p>
-                Une base mondiale structurée pour rendre les profils visibles,
-                faciliter le recrutement, vérifier les acteurs et créer des
-                opportunités dans tout l'écosystème football.
-              </p>
-            </div>
-
-            <div className="metrics">
-              <div className="metric">
-                <strong>{players.length}</strong>
-                <span>profils joueurs</span>
-              </div>
-              <div className="metric">
-                <strong>{clubs.length}</strong>
-                <span>clubs initiaux</span>
-              </div>
-              <div className="metric">
-                <strong>2</strong>
-                <span>pays pilotes data</span>
+      <div className="social-layout">
+        <aside className="left-rail">
+          <section className="profile-widget">
+            <div className="profile-cover" />
+            <div className="profile-body">
+              <div className="profile-photo">FN</div>
+              <h2>Football Network</h2>
+              <p>Réseau professionnel mondial du football</p>
+              <div className="profile-stats">
+                <span>
+                  <strong>{players.length}</strong>
+                  profils joueurs
+                </span>
+                <span>
+                  <strong>{clubs.length}</strong>
+                  clubs suivis
+                </span>
               </div>
             </div>
-          </div>
+          </section>
 
-          <div className="panel">
-            <h2>Priorités MVP</h2>
-            <div className="tag-row">
-              <span className="tag">Profil joueur</span>
-              <span className="tag">Recherche</span>
-              <span className="tag">Pages clubs</span>
-              <span className="tag">Opportunités</span>
-              <span className="tag">Messagerie</span>
-              <span className="tag">Premium</span>
-              <span className="tag">Vérification</span>
+          <section className="side-widget">
+            <h3>Mon réseau</h3>
+            <a href="/players">Joueurs recommandés</a>
+            <a href="/clubs">Clubs à revendiquer</a>
+            <a href="/messages">Messages reçus</a>
+            <a href="/opportunities">Opportunités sauvegardées</a>
+          </section>
+
+          <section className="side-widget compact">
+            <h3>Accès rapide</h3>
+            <a href="/players">Créer un profil joueur</a>
+            <a href="/clubs">Ajouter un club</a>
+            <a href="/opportunities">Publier un besoin</a>
+          </section>
+        </aside>
+
+        <section className="center-feed">
+          <article className="composer-card">
+            <div className="composer-line">
+              <div className="avatar">FN</div>
+              <button>Commencer une publication</button>
             </div>
-          </div>
+            <div className="composer-actions">
+              <button>Vidéo</button>
+              <button>Photo</button>
+              <button>Annonce recrutement</button>
+              <button>Article</button>
+            </div>
+          </article>
+
+          <article className="feed-card">
+            <div className="post-author">
+              <div className="avatar">{featuredPlayer?.name.charAt(0) ?? "J"}</div>
+              <div>
+                <strong>{featuredPlayer?.name ?? "Joueur à suivre"}</strong>
+                <span>
+                  {featuredPlayer?.position ?? "Profil joueur"} -{" "}
+                  {featuredPlayer?.status ?? "Disponible"}
+                </span>
+              </div>
+            </div>
+            <p>
+              Nouvelle vidéo ajoutée : appels en profondeur, vitesse d'exécution,
+              finition et séquences de match. Profil visible par les clubs,
+              recruteurs et agents vérifiés.
+            </p>
+            <div className="football-media">
+              <div>
+                <span>Highlight vidéo</span>
+                <strong>3 actions clés</strong>
+              </div>
+            </div>
+            <div className="post-actions">
+              <button>Recommander</button>
+              <button>Commenter</button>
+              <button>Partager</button>
+              <button>Short-list</button>
+            </div>
+          </article>
+
+          <article className="feed-card">
+            <div className="post-author">
+              <div className="avatar">C</div>
+              <div>
+                <strong>CODM Meknès</strong>
+                <span>Club - Besoin de recrutement</span>
+              </div>
+            </div>
+            <p>
+              Recherche attaquant U23 disponible rapidement. Priorité aux profils
+              avec vidéo, statistiques et références vérifiables.
+            </p>
+            <div className="job-strip">
+              <span>Avant-centre</span>
+              <span>Botola Pro</span>
+              <span>Disponible maintenant</span>
+            </div>
+          </article>
         </section>
 
-        <div className="sections">
-          <section className="section">
-            <h2>Joueurs à mettre en avant</h2>
-            <div className="grid">
-              {players.map((player) => (
-                <article className="card" key={player.id}>
-                  <div className="card-header">
-                    <div>
-                      <div className="avatar">{player.name.charAt(0)}</div>
-                    </div>
-                    <span className="tag">{player.status}</span>
-                  </div>
-                  <div>
-                    <h3>{player.name}</h3>
-                    <p className="muted">
-                      {player.age} ans - {player.position} - {player.club}
-                    </p>
-                  </div>
-                  <div className="tag-row">
-                    <span className="tag">{player.country}</span>
-                    <span className="tag">{player.city}</span>
-                    <span className="tag">Pied {player.foot}</span>
-                    <span className="tag">{player.height}</span>
-                  </div>
-                  <div className="stat-line">
-                    <div className="stat">
-                      <strong>{player.stats.matches}</strong>
-                      <span className="muted">matchs</span>
-                    </div>
-                    <div className="stat">
-                      <strong>{player.stats.goals}</strong>
-                      <span className="muted">buts</span>
-                    </div>
-                    <div className="stat">
-                      <strong>{player.stats.assists}</strong>
-                      <span className="muted">passes</span>
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
+        <aside className="right-rail">
+          <section className="side-widget news-widget">
+            <h3>Actualités football</h3>
+            <a href="/">Profils vérifiés : priorité aux données fiables</a>
+            <a href="/">Les clubs peuvent revendiquer leur page</a>
+            <a href="/">Les vidéos deviennent centrales dans le recrutement</a>
+            <a href="/">Agents et recruteurs : accès premium à venir</a>
           </section>
 
-          <section className="section">
-            <h2>Fil réseau</h2>
-            <div className="feed-layout">
-              <article className="post-card">
-                <div className="post-author">
-                  <div className="avatar">Y</div>
-                  <div>
-                    <strong>Yanis Benali</strong>
-                    <span>Avant-centre - Disponible maintenant</span>
-                  </div>
-                </div>
-                <p>
-                  Nouvelle vidéo ajoutée : appels en profondeur, finition pied
-                  droit et jeu dos au but. Profil ouvert aux clubs et recruteurs
-                  vérifiés.
-                </p>
-                <div className="media-preview">
-                  <span>Highlight vidéo</span>
-                </div>
-                <div className="post-actions">
-                  <button>Recommander</button>
-                  <button>Ajouter à une short-list</button>
-                  <button>Contacter</button>
-                </div>
-              </article>
-
-              <aside className="signal-panel">
-                <h3>Notifications</h3>
-                <span>2 demandes de relation</span>
-                <span>1 club a consulté un profil</span>
-                <span>3 opportunités correspondent à vos critères</span>
-              </aside>
-            </div>
+          <section className="side-widget">
+            <h3>Opportunités récentes</h3>
+            {opportunities.slice(0, 3).map((opportunity) => (
+              <a href="/opportunities" key={opportunity.id}>
+                <strong>{opportunity.title}</strong>
+                <span>
+                  {opportunity.city}, {opportunity.country}
+                </span>
+              </a>
+            ))}
           </section>
 
-          <section className="section">
-            <h2>Clubs et besoins</h2>
-            <div className="grid">
-              {clubs.map((club) => (
-                <article className="card" key={club.id}>
-                  <div>
-                    <h3>{club.name}</h3>
-                    <p className="muted">
-                      {club.city}, {club.country} - {club.division}
-                    </p>
-                  </div>
-                  <span className="tag">{club.status}</span>
-                  <div className="tag-row">
-                    {club.needs.map((need) => (
-                      <span className="tag" key={need}>
-                        {need}
-                      </span>
-                    ))}
-                  </div>
-                </article>
-              ))}
-            </div>
+          <section className="side-widget">
+            <h3>Notifications</h3>
+            <span>2 demandes de relation en attente</span>
+            <span>1 club a consulté un profil</span>
+            <span>3 recherches sauvegardées à compléter</span>
           </section>
-        </div>
+        </aside>
+      </div>
     </AppShell>
   );
 }
