@@ -7,9 +7,9 @@ export default async function Home() {
 
   return (
     <AppShell active="overview">
-      <div className="social-layout">
+      <div className="social-layout jr-layout">
         <aside className="left-rail">
-          <section className="profile-widget">
+          <section className="jr-panel profile-widget">
             <div className="profile-cover" />
             <div className="profile-body">
               <div className="profile-photo">FN</div>
@@ -28,37 +28,83 @@ export default async function Home() {
             </div>
           </section>
 
-          <section className="side-widget">
-            <h3>Mon réseau</h3>
-            <a href="/players">Joueurs recommandés</a>
-            <a href="/clubs">Clubs à revendiquer</a>
-            <a href="/messages">Messages reçus</a>
-            <a href="/opportunities">Opportunités sauvegardées</a>
+          <section className="jr-panel match-list-widget">
+            <div className="widget-tabs">
+              <button className="active">Favoris</button>
+              <button>Compétitions</button>
+            </div>
+            <h3>Opportunités suivies</h3>
+            <div className="mini-match active">
+              <span>LIVE</span>
+              <strong>CODM Meknès</strong>
+              <em>Recherche attaquant U23</em>
+            </div>
+            <div className="mini-match">
+              <span>15:00</span>
+              <strong>FC Nantes</strong>
+              <em>Essai gardien senior</em>
+            </div>
+            <div className="mini-match">
+              <span>20:00</span>
+              <strong>Académie internationale</strong>
+              <em>Analyste vidéo</em>
+            </div>
           </section>
 
-          <section className="side-widget compact">
+          <section className="jr-panel side-widget compact">
             <h3>Accès rapide</h3>
             <a href="/players">Créer un profil joueur</a>
-            <a href="/clubs">Ajouter un club</a>
+            <a href="/clubs">Revendiquer un club</a>
             <a href="/opportunities">Publier un besoin</a>
           </section>
         </aside>
 
         <section className="center-feed">
-          <article className="composer-card">
+          <article className="jr-score-card">
+            <div className="score-meta">
+              <span>FOOTBALL NETWORK</span>
+              <strong>Profil joueur connecté</strong>
+              <span>JustRate sync</span>
+            </div>
+            <div className="score-board">
+              <div className="team-side">
+                <div className="club-badge">JR</div>
+                <strong>{featuredPlayer?.name ?? "Joueur à suivre"}</strong>
+                <span>{featuredPlayer?.position ?? "Profil joueur"}</span>
+              </div>
+              <div className="main-score">
+                <span>JRI</span>
+                <strong>8.3</strong>
+                <em>{featuredPlayer?.status ?? "Disponible"}</em>
+              </div>
+              <div className="team-side">
+                <div className="club-badge alt">FN</div>
+                <strong>{featuredPlayer?.club ?? "Club à renseigner"}</strong>
+                <span>{featuredPlayer?.city ?? "Marché mondial"}</span>
+              </div>
+            </div>
+            <div className="score-details">
+              <span>{featuredPlayer?.stats.matches ?? 0} matchs</span>
+              <span>{featuredPlayer?.stats.goals ?? 0} buts</span>
+              <span>{featuredPlayer?.stats.assists ?? 0} passes</span>
+              <span>Profil vérifié à {featuredPlayer?.completion ?? 0}%</span>
+            </div>
+          </article>
+
+          <article className="composer-card jr-panel">
             <div className="composer-line">
               <div className="avatar">FN</div>
-              <button>Commencer une publication</button>
+              <button>Partager une actualité football</button>
             </div>
             <div className="composer-actions">
               <button>Vidéo</button>
               <button>Photo</button>
-              <button>Annonce recrutement</button>
-              <button>Article</button>
+              <button>Stats</button>
+              <button>Recrutement</button>
             </div>
           </article>
 
-          <article className="feed-card">
+          <article className="feed-card jr-panel">
             <div className="post-author">
               <div className="avatar">{featuredPlayer?.name.charAt(0) ?? "J"}</div>
               <div>
@@ -77,7 +123,7 @@ export default async function Home() {
             <div className="football-media">
               <div>
                 <span>Highlight vidéo</span>
-                <strong>3 actions clés</strong>
+                <strong>Actions clés + stats JustRate</strong>
               </div>
             </div>
             <div className="post-actions">
@@ -88,7 +134,7 @@ export default async function Home() {
             </div>
           </article>
 
-          <article className="feed-card">
+          <article className="feed-card jr-panel">
             <div className="post-author">
               <div className="avatar">C</div>
               <div>
@@ -109,15 +155,29 @@ export default async function Home() {
         </section>
 
         <aside className="right-rail">
-          <section className="side-widget news-widget">
-            <h3>Actualités football</h3>
-            <a href="/">Profils vérifiés : priorité aux données fiables</a>
-            <a href="/">Les clubs peuvent revendiquer leur page</a>
-            <a href="/">Les vidéos deviennent centrales dans le recrutement</a>
-            <a href="/">Agents et recruteurs : accès premium à venir</a>
+          <section className="jr-panel ranking-widget">
+            <div className="talent-card">
+              <div className="avatar">J</div>
+              <div>
+                <strong>Pépite de la semaine</strong>
+                <span>{featuredPlayer?.name ?? "Profil joueur"}</span>
+              </div>
+              <b>8.3</b>
+            </div>
+            <h3>Top profils joueurs</h3>
+            {players.slice(0, 3).map((player, index) => (
+              <div className="rank-row" key={player.id}>
+                <span>{index + 1}</span>
+                <div>
+                  <strong>{player.name}</strong>
+                  <em>{player.position}</em>
+                </div>
+                <b>{(8.5 - index * 0.18).toFixed(1)}</b>
+              </div>
+            ))}
           </section>
 
-          <section className="side-widget">
+          <section className="jr-panel side-widget">
             <h3>Opportunités récentes</h3>
             {opportunities.slice(0, 3).map((opportunity) => (
               <a href="/opportunities" key={opportunity.id}>
@@ -129,11 +189,13 @@ export default async function Home() {
             ))}
           </section>
 
-          <section className="side-widget">
-            <h3>Notifications</h3>
-            <span>2 demandes de relation en attente</span>
-            <span>1 club a consulté un profil</span>
-            <span>3 recherches sauvegardées à compléter</span>
+          <section className="jr-panel justrate-sync">
+            <h3>Connexion JustRate</h3>
+            <p>
+              Lier un profil joueur Football Network à son profil JustRate pour
+              afficher les notes, matchs, statistiques et tendances en temps réel.
+            </p>
+            <button>Lier un profil JustRate</button>
           </section>
         </aside>
       </div>
