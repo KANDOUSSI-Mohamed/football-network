@@ -1,144 +1,433 @@
-﻿const visualRefinement = `
-:root{--bg:#06070b;--surface:#0d1017;--surface2:#111621;--ink:#f3f6f0;--soft:#d7ddd4;--muted:#8e99a9;--faint:#667184;--line:#232936;--line2:#191f2a;--accent:#a8df2d;--accent-soft:#95c929;--green:#32c46a}
-html,body{font-family:"Inter","Segoe UI Variable","Segoe UI",Arial,sans-serif;font-size:13px;line-height:1.5;font-weight:400;letter-spacing:0;background:var(--bg)}
-button,input,select{letter-spacing:0}
-.shell{background:var(--bg)}
-.network-topbar{height:58px;grid-template-columns:178px minmax(220px,320px) 1fr auto;gap:16px;padding:0 max(22px,calc((100vw - 1400px)/2));background:rgba(7,8,13,.97);border-bottom-color:#1a202b;box-shadow:0 8px 28px rgba(0,0,0,.18)}
-.brand-lockup{display:flex;align-items:center;gap:9px;color:#f5f7f2;font-size:13px;font-weight:650;white-space:nowrap}
-.brand-mark{width:32px;height:32px;border-radius:7px;background:#101720;border-color:#35511d;font-size:13px;font-weight:700}
-.global-search input{height:36px;border-radius:7px;border-color:#202733;background:#0d111a;padding:8px 12px;font-size:12px}
-.global-search input:focus{border-color:#587a26;box-shadow:0 0 0 3px rgba(168,223,45,.08)}
-.top-nav{height:58px;gap:2px;align-items:stretch}
-.top-nav a{position:relative;display:flex;align-items:center;justify-content:center;min-width:72px;padding:0 10px;border:0;color:#8995a6;font-size:11.5px;font-weight:500}
-.top-nav a:after{content:"";position:absolute;left:20%;right:20%;bottom:0;height:2px;border-radius:2px 2px 0 0;background:transparent}
-.top-nav a.active,.top-nav a:hover{border:0;color:#eef3e9}
-.top-nav a.active:after{background:var(--accent)}
-.top-actions{gap:6px}
-.top-actions button{padding:7px 10px;border-radius:7px;background:#0d111a;border-color:#202733;color:#aab3c0;font-size:11.5px;font-weight:500}
-.layout-frame{height:calc(100vh - 58px);max-width:1440px;padding:16px 20px;grid-template-columns:292px minmax(580px,1fr) 318px;gap:14px}
-.fixed-rail{max-height:calc(100vh - 90px)}
-.left-rail,.right-rail,.center-feed{gap:11px}
-.center-scroll{padding-right:5px}
-.jr-panel,.jr-score-card,.feed-card,.composer-card,.card{background:var(--surface);border-color:var(--line2);border-radius:7px;box-shadow:0 1px 0 rgba(255,255,255,.015)}
-.app-status{margin:0 1px 9px;font-size:10.5px;font-weight:500;color:#707c8f}
-.app-status strong{font-size:11px;font-weight:600;color:#cfd6cd}
-.profile-cover{height:58px}
-.profile-body{gap:5px;padding:0 14px 13px}
-.profile-photo{width:60px;height:60px;margin-top:-30px;font-size:13px}
-.profile-body h2{font-size:14px;font-weight:600}
-.profile-body p,.muted{font-size:11.5px}
-.profile-stats{gap:5px;margin-top:7px;padding-top:9px}
-.profile-stats span{font-size:11px;font-weight:450}
-.profile-stats strong{font-weight:600}
-.side-widget{gap:8px;padding:13px}
-.side-widget h3{font-size:13.5px;font-weight:600}
-.side-widget a{font-size:11.5px;font-weight:400}
-.side-widget strong{font-weight:550}
-.widget-tabs{gap:6px;padding:9px}
-.widget-tabs button,.composer-actions button,.button{min-height:33px;padding:7px 9px;border-radius:6px;border-color:#283143;background:#111722;color:#9ca7b6;font-size:11.5px;font-weight:550}
-.widget-tabs button.active{background:rgba(168,223,45,.1);border-color:rgba(168,223,45,.34);color:#c5eb72}
-.button.primary{background:#1a2a14;border-color:#496827;color:#c7eb78}
-.match-list-widget h3,.ranking-widget h3{margin:7px 12px;color:#778397;font-size:9.5px;font-weight:650;letter-spacing:0}
-.mini-match{gap:2px;padding:8px 12px;font-size:11.5px}
-.mini-match.active{background:rgba(57,108,219,.07);border-left:2px solid #3d69ca;padding-left:10px}
-.mini-match span{font-size:9.5px}
-.mini-match strong{font-size:11.5px;font-weight:600}
-.mini-match em{font-size:11px}
-.ranking-widget{padding:10px}
-.talent-card{grid-template-columns:36px 1fr auto;gap:8px;padding:9px;margin-bottom:11px}
-.avatar{width:34px;height:34px;font-size:11px;font-weight:650}
-.talent-card strong{font-size:12.5px;font-weight:600}
-.talent-card span,.rank-row em{font-size:10.5px}
-.rank-row{grid-template-columns:20px 1fr auto;gap:8px;padding:8px 3px}
-.rank-row strong{font-size:11.5px;font-weight:600}
-.justrate-sync{padding:13px}
-.justrate-sync h3{margin-bottom:8px;font-size:14px;font-weight:600}
-.justrate-sync p{font-size:11.5px}
-.justrate-sync button{padding:9px;font-size:11.5px;font-weight:650}
-.jr-score-card{padding:20px 26px}
-.score-meta{font-size:9.5px;font-weight:600;letter-spacing:0}
-.score-board{grid-template-columns:1fr 132px 1fr;gap:16px;margin:16px 0}
-.club-badge{width:54px;height:54px;margin-bottom:7px;border-radius:12px;font-size:13px}
-.team-side strong{font-size:13.5px;font-weight:600}
-.team-side span{font-size:11px}
-.main-score span{font-size:9.5px;letter-spacing:0}
-.main-score strong{font-size:48px;font-weight:650}
-.main-score em{font-size:10px}
-.score-details{gap:6px}
-.score-details span,.tag{padding:4px 7px;font-size:10.5px;font-weight:450}
-.composer-card{padding:11px}
-.composer-line{grid-template-columns:34px 1fr;gap:9px}
-.composer-line button{padding:9px 13px;border-radius:7px;font-size:11.5px}
-.composer-actions{gap:6px;margin-top:9px}
-.composer-actions button{background:#101720;color:#9aa5b5}
-.feed-card{padding:13px}
-.post-author{grid-template-columns:36px 1fr;gap:9px}
-.post-author strong{font-size:12px;font-weight:600}
-.post-author span{font-size:10.5px}
-.feed-card p{margin:12px 0;font-size:12.5px;line-height:1.6}
-.football-media{height:230px;padding:18px;margin:11px 0}
-.football-media strong{font-size:17px;font-weight:600}
-.football-media span{font-size:9.5px;letter-spacing:0}
-.post-actions{gap:6px;padding-top:9px}
-.post-actions button{padding:5px;font-size:11px;font-weight:500}
-.job-strip span{padding:5px 8px;font-size:10.5px;font-weight:500}
-.page-heading h1{font-size:20px;font-weight:600}
-.eyebrow{font-size:9.5px;letter-spacing:0}
-.card h3{font-size:13.5px;font-weight:600}
-@media(max-width:1250px){.network-topbar{grid-template-columns:42px minmax(220px,1fr) auto;height:auto;padding-top:8px}.brand-lockup>span:last-child{display:none}.top-nav{grid-column:1/-1;order:4;height:42px;overflow:auto}.layout-frame{height:calc(100vh - 108px);grid-template-columns:260px minmax(520px,1fr) 285px}.fixed-rail{max-height:calc(100vh - 138px)}}
-@media(max-width:1100px){.network-topbar{grid-template-columns:42px 1fr auto;padding:10px 12px}.layout-frame{height:auto;grid-template-columns:1fr}.brand-lockup{grid-column:1}.global-search{grid-column:2}.top-actions{grid-column:3}.top-nav{grid-column:1/-1}.score-board{grid-template-columns:1fr}.fixed-rail{display:none}}
-`;
+const localeOrder = ["fr", "en", "es", "it", "pt", "de", "nl", "ar", "tr"];
 
-const linkedinRefinement = `
-.network-topbar{grid-template-columns:170px minmax(220px,280px) 1fr auto;padding-left:max(20px,calc((100vw - 1280px)/2));padding-right:max(20px,calc((100vw - 1280px)/2))}
-.layout-frame{max-width:1320px;grid-template-columns:260px minmax(590px,1fr) 300px}
-.network-metrics{display:grid;padding:4px 0}
-.metric-row{display:flex;align-items:center;justify-content:space-between;padding:9px 13px;color:#a2acba;font-size:11px}
-.metric-row+.metric-row{border-top:1px solid #181e29}
-.metric-row strong{color:#b4e95a;font-size:11px;font-weight:600}
-.metric-cta{margin-top:3px;padding:10px 13px;border-top:1px solid #202633;color:#cfd5cd;font-size:11px;font-weight:550}
-.football-news{padding:13px}
-.football-news h3{margin:0 0 3px;font-size:14px;font-weight:600}
-.football-news>span{color:#748094;font-size:10.5px}
-.news-list{display:grid;gap:10px;margin-top:12px}
-.news-item{display:grid;gap:1px}
-.news-item strong{color:#dbe1d9;font-size:11.5px;font-weight:550}
-.news-item span{color:#748094;font-size:10px}
-.welcome-card{position:relative;padding:20px 24px;text-align:center;background:radial-gradient(circle at 50% 0,rgba(63,127,43,.18),transparent 42%),#0d1017}
-.welcome-close{position:absolute;top:10px;right:11px;width:28px;height:28px;border:0;background:transparent;color:#7f8998;font-size:18px}
-.welcome-avatar{width:70px;height:70px;margin:0 auto 12px;border-radius:50%;display:grid;place-items:center;background:#101820;border:1px solid #37541d;color:#a8df2d;font-size:18px;font-weight:700;box-shadow:0 0 0 6px rgba(168,223,45,.045)}
-.welcome-card h1{margin:0;color:#f1f4ef;font-size:16px;line-height:1.3;font-weight:600}
-.welcome-card p{max-width:540px;margin:7px auto 14px;color:#9aa4b2;font-size:11.5px;line-height:1.55}
-.objective-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.objective-actions button{min-height:34px;border-radius:999px;border:1px solid #456628;background:#182313;color:#c7e989;font-size:11.5px;font-weight:600}
-.objective-actions button.secondary{background:transparent;border-color:#344052;color:#aeb7c4}
-.feed-sort{display:flex;align-items:center;gap:10px;color:#6f7a8c;font-size:10px}
-.feed-sort:before{content:"";height:1px;flex:1;background:#1b222e}
-.new-posts{justify-self:center;margin:-2px auto 0;border:1px solid #34551e;border-radius:999px;background:#142010;color:#b9e76d;padding:6px 12px;font-size:10.5px;font-weight:600}
-.performance-strip{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;margin:11px 0;padding:11px;border:1px solid #1c4f2c;border-radius:7px;background:#09170f}
-.performance-player{display:grid;grid-template-columns:38px 1fr;gap:9px;align-items:center}
-.performance-player strong{font-size:11.5px;font-weight:600}
-.performance-player span{display:block;color:#788597;font-size:10.5px}
-.performance-score{text-align:right}
-.performance-score strong{display:block;color:#a8df2d;font-size:24px;line-height:1;font-weight:650}
-.performance-score span{color:#778397;font-size:9.5px}
-@media(max-width:1250px){.layout-frame{grid-template-columns:245px minmax(520px,1fr) 275px}.network-topbar{grid-template-columns:42px minmax(220px,1fr) auto}}
-@media(max-width:1100px){.objective-actions{grid-template-columns:1fr}.layout-frame{grid-template-columns:1fr}.football-news,.network-metrics{display:none}}
-`;
+const i18n = {
+  fr: {
+    label: "Français", dir: "ltr",
+    nav: ["Accueil", "Profils", "Organisations", "Recrutement", "Messagerie"],
+    search: "Rechercher une personne, un métier, un club...",
+    notifications: "Notifications", you: "Vous",
+    mission: "Le réseau professionnel mondial de tous les acteurs du football",
+    metrics: ["Vues du profil", "Apparitions dans les recherches", "Relations football"],
+    complete: "Compléter mon profil professionnel",
+    quick: "Accès rapide", quickLinks: ["Créer mon profil", "Revendiquer une organisation", "Publier un besoin"],
+    followed: "Opportunités suivies", live: "EN DIRECT",
+    opportunityItems: ["Recherche attaquant U23", "Essai gardien senior", "Analyste vidéo recherché"],
+    newsTitle: "Actualités du football", newsSub: "À la une aujourd'hui",
+    news: ["Mercato : les profils U23 les plus suivis", "Les clubs accélèrent leur recrutement vidéo", "Les nouveaux métiers qui transforment les staffs", "JustRate publie son indice de la semaine"],
+    recent: "Opportunités récentes", readers: "lecteurs",
+    justrateTitle: "Connexion JustRate",
+    justrateText: "Connectez un profil sportif vérifié pour afficher matchs, statistiques et indice JRI.",
+    justrateCta: "Connecter un profil JustRate",
+    bridge: "JustRate : liaison à vérifier",
+    hello: "Bonjour Mohamed, quel est votre objectif aujourd'hui ?",
+    purpose: "Football Network relie directement tous les métiers du football : terrain, staff, médical, direction, recrutement, logistique et marketing.",
+    recruit: "Je recrute", network: "Je développe mon réseau",
+    startPost: "Commencer une publication", composer: ["Vidéo", "Photo", "Statistiques", "Recrutement"],
+    sort: "Classer par : Pertinence", newPosts: "Nouvelles publications",
+    postStatus: "Avant-centre · Disponible maintenant",
+    postText: "Nouvelle vidéo ajoutée : appels en profondeur, vitesse d'exécution, finition et séquences de match. Profil visible par les clubs, recruteurs et agents vérifiés.",
+    connected: "Profil connecté à JustRate", statLabels: ["matchs", "buts", "passes"], jri: "Indice JRI",
+    featured: "Vidéo à la une", keyActions: "Actions clés et statistiques JustRate",
+    actions: ["Recommander", "Commenter", "Partager", "Short-list"],
+    clubStatus: "Club · Besoin de recrutement",
+    clubPost: "Recherche attaquant U23 disponible rapidement. Priorité aux profils avec vidéo, statistiques et références vérifiables.",
+    profilesTitle: "Tous les talents et métiers du football",
+    profilesIntro: "Joueurs, staffs, médical, direction, recrutement, administration, logistique, marketing et tous les professionnels du football.",
+    newProfile: "Créer un profil", filter: "Rechercher par nom, métier, pays, club ou disponibilité...",
+    organizationsTitle: "Clubs, académies, agences et organisations",
+    organizationsIntro: "Recherchez une structure, identifiez ses responsables et contactez directement les bons interlocuteurs.",
+    opportunitiesTitle: "Opportunités dans tout l'écosystème du football",
+    opportunitiesIntro: "Emplois, missions, essais, recrutements sportifs et besoins de prestations.",
+    messagesTitle: "Relations et conversations professionnelles",
+    messagesIntro: "Échangez directement avec les personnes et organisations de votre réseau.",
+    open: "Ouvert", applications: "Candidatures", toHandle: "À traiter", fresh: "Nouveau",
+    roles: ["Joueur", "Entraîneur", "Entraîneur adjoint", "Préparateur physique", "Médecin du sport", "Kinésithérapeute", "Ostéopathe", "Analyste vidéo", "Recruteur", "Agent", "Président de club", "Directeur général", "Responsable marketing", "Responsable logistique", "Responsable administratif"]
+  },
+  en: {
+    label: "English", dir: "ltr",
+    nav: ["Home", "Profiles", "Organizations", "Recruitment", "Messages"],
+    search: "Search for a person, role or club...",
+    notifications: "Notifications", you: "You",
+    mission: "The global professional network for everyone working in football",
+    metrics: ["Profile views", "Search appearances", "Football connections"],
+    complete: "Complete my professional profile",
+    quick: "Quick access", quickLinks: ["Create my profile", "Claim an organization", "Post a requirement"],
+    followed: "Followed opportunities", live: "LIVE",
+    opportunityItems: ["U23 striker wanted", "Senior goalkeeper trial", "Video analyst wanted"],
+    newsTitle: "Football news", newsSub: "Today's headlines",
+    news: ["Transfer market: the most followed U23 profiles", "Clubs accelerate video-based recruitment", "New roles transforming football staffs", "JustRate publishes its weekly index"],
+    recent: "Recent opportunities", readers: "readers",
+    justrateTitle: "Connect JustRate",
+    justrateText: "Connect a verified sporting profile to display matches, statistics and the JRI index.",
+    justrateCta: "Connect a JustRate profile",
+    bridge: "JustRate: verification pending",
+    hello: "Hello Mohamed, what is your goal today?",
+    purpose: "Football Network directly connects every football profession: pitch, staff, medical, management, recruitment, logistics and marketing.",
+    recruit: "I am recruiting", network: "Grow my network",
+    startPost: "Start a post", composer: ["Video", "Photo", "Statistics", "Recruitment"],
+    sort: "Sort by: Relevance", newPosts: "New posts",
+    postStatus: "Centre-forward · Available now",
+    postText: "New video added: runs in behind, execution speed, finishing and match sequences. Profile visible to verified clubs, recruiters and agents.",
+    connected: "Connected to JustRate", statLabels: ["matches", "goals", "assists"], jri: "JRI index",
+    featured: "Featured video", keyActions: "Key actions and JustRate statistics",
+    actions: ["Recommend", "Comment", "Share", "Shortlist"],
+    clubStatus: "Club · Recruitment requirement",
+    clubPost: "U23 striker required quickly. Priority to profiles with video, statistics and verifiable references.",
+    profilesTitle: "Every talent and profession in football",
+    profilesIntro: "Players, staff, medical teams, management, recruitment, administration, logistics, marketing and every football professional.",
+    newProfile: "Create profile", filter: "Search by name, role, country, club or availability...",
+    organizationsTitle: "Clubs, academies, agencies and organizations",
+    organizationsIntro: "Find an organization, identify its decision-makers and contact the right people directly.",
+    opportunitiesTitle: "Opportunities across the football ecosystem",
+    opportunitiesIntro: "Jobs, assignments, trials, sporting recruitment and service requirements.",
+    messagesTitle: "Professional connections and conversations",
+    messagesIntro: "Communicate directly with people and organizations in your network.",
+    open: "Open", applications: "Applications", toHandle: "To handle", fresh: "New",
+    roles: ["Player", "Head coach", "Assistant coach", "Fitness coach", "Sports doctor", "Physiotherapist", "Osteopath", "Video analyst", "Scout", "Agent", "Club president", "General manager", "Marketing manager", "Logistics manager", "Administrative manager"]
+  },
+  es: {
+    label: "Español", dir: "ltr",
+    nav: ["Inicio", "Perfiles", "Organizaciones", "Reclutamiento", "Mensajes"],
+    search: "Buscar una persona, profesión o club...",
+    notifications: "Notificaciones", you: "Tú",
+    mission: "La red profesional mundial para todos los actores del fútbol",
+    metrics: ["Visitas al perfil", "Apariciones en búsquedas", "Contactos de fútbol"],
+    complete: "Completar mi perfil profesional",
+    quick: "Acceso rápido", quickLinks: ["Crear mi perfil", "Reclamar una organización", "Publicar una necesidad"],
+    followed: "Oportunidades seguidas", live: "EN DIRECTO",
+    opportunityItems: ["Se busca delantero U23", "Prueba para portero sénior", "Se busca analista de vídeo"],
+    newsTitle: "Actualidad del fútbol", newsSub: "Titulares de hoy",
+    news: ["Mercado: los perfiles U23 más seguidos", "Los clubes aceleran el reclutamiento por vídeo", "Los nuevos oficios que transforman los cuerpos técnicos", "JustRate publica su índice semanal"],
+    recent: "Oportunidades recientes", readers: "lectores",
+    justrateTitle: "Conexión JustRate", justrateText: "Conecta un perfil deportivo verificado para mostrar partidos, estadísticas e índice JRI.", justrateCta: "Conectar un perfil JustRate",
+    bridge: "JustRate: verificación pendiente",
+    hello: "Hola Mohamed, ¿cuál es tu objetivo hoy?",
+    purpose: "Football Network conecta directamente todos los oficios del fútbol: campo, cuerpo técnico, medicina, dirección, reclutamiento, logística y marketing.",
+    recruit: "Estoy reclutando", network: "Ampliar mi red",
+    startPost: "Crear una publicación", composer: ["Vídeo", "Foto", "Estadísticas", "Reclutamiento"],
+    sort: "Ordenar por: Relevancia", newPosts: "Nuevas publicaciones",
+    postStatus: "Delantero centro · Disponible ahora", postText: "Nuevo vídeo añadido: desmarques, velocidad de ejecución, definición y secuencias de partido. Perfil visible para clubes, reclutadores y agentes verificados.",
+    connected: "Conectado con JustRate", statLabels: ["partidos", "goles", "asistencias"], jri: "Índice JRI", featured: "Vídeo destacado", keyActions: "Acciones clave y estadísticas JustRate",
+    actions: ["Recomendar", "Comentar", "Compartir", "Preseleccionar"],
+    clubStatus: "Club · Necesidad de reclutamiento", clubPost: "Se busca delantero U23 disponible rápidamente. Prioridad a perfiles con vídeo, estadísticas y referencias verificables.",
+    profilesTitle: "Todos los talentos y profesiones del fútbol", profilesIntro: "Jugadores, cuerpos técnicos, medicina, dirección, reclutamiento, administración, logística, marketing y todos los profesionales del fútbol.",
+    newProfile: "Crear perfil", filter: "Buscar por nombre, profesión, país, club o disponibilidad...",
+    organizationsTitle: "Clubes, academias, agencias y organizaciones", organizationsIntro: "Encuentra una entidad, identifica a sus responsables y contacta directamente con las personas adecuadas.",
+    opportunitiesTitle: "Oportunidades en todo el ecosistema del fútbol", opportunitiesIntro: "Empleo, misiones, pruebas, reclutamiento deportivo y necesidades de servicios.",
+    messagesTitle: "Contactos y conversaciones profesionales", messagesIntro: "Comunícate directamente con las personas y organizaciones de tu red.",
+    open: "Abierto", applications: "Candidaturas", toHandle: "Pendiente", fresh: "Nuevo",
+    roles: ["Jugador", "Entrenador", "Segundo entrenador", "Preparador físico", "Médico deportivo", "Fisioterapeuta", "Osteópata", "Analista de vídeo", "Ojeador", "Agente", "Presidente de club", "Director general", "Responsable de marketing", "Responsable de logística", "Responsable administrativo"]
+  },
+  it: {
+    label: "Italiano", dir: "ltr",
+    nav: ["Home", "Profili", "Organizzazioni", "Reclutamento", "Messaggi"],
+    search: "Cerca una persona, un ruolo o un club...",
+    notifications: "Notifiche", you: "Tu",
+    mission: "La rete professionale mondiale per tutti gli attori del calcio",
+    metrics: ["Visite al profilo", "Presenze nelle ricerche", "Collegamenti nel calcio"],
+    complete: "Completa il mio profilo professionale",
+    quick: "Accesso rapido", quickLinks: ["Crea il mio profilo", "Rivendica un'organizzazione", "Pubblica un'esigenza"],
+    followed: "Opportunità seguite", live: "LIVE",
+    opportunityItems: ["Cercasi attaccante U23", "Provino portiere senior", "Cercasi video analyst"],
+    newsTitle: "Notizie di calcio", newsSub: "In primo piano oggi",
+    news: ["Mercato: i profili U23 più seguiti", "I club accelerano il reclutamento video", "I nuovi ruoli che trasformano gli staff", "JustRate pubblica l'indice settimanale"],
+    recent: "Opportunità recenti", readers: "lettori",
+    justrateTitle: "Collega JustRate", justrateText: "Collega un profilo sportivo verificato per mostrare partite, statistiche e indice JRI.", justrateCta: "Collega un profilo JustRate",
+    bridge: "JustRate: verifica in sospeso",
+    hello: "Ciao Mohamed, qual è il tuo obiettivo oggi?",
+    purpose: "Football Network collega direttamente ogni professione del calcio: campo, staff, area medica, direzione, reclutamento, logistica e marketing.",
+    recruit: "Sto reclutando", network: "Sviluppa la mia rete",
+    startPost: "Crea un post", composer: ["Video", "Foto", "Statistiche", "Reclutamento"],
+    sort: "Ordina per: Pertinenza", newPosts: "Nuovi post",
+    postStatus: "Centravanti · Disponibile ora", postText: "Nuovo video aggiunto: attacchi alla profondità, velocità di esecuzione, finalizzazione e sequenze di gara. Profilo visibile a club, scout e agenti verificati.",
+    connected: "Collegato a JustRate", statLabels: ["partite", "gol", "assist"], jri: "Indice JRI", featured: "Video in evidenza", keyActions: "Azioni chiave e statistiche JustRate",
+    actions: ["Consiglia", "Commenta", "Condividi", "Short-list"],
+    clubStatus: "Club · Esigenza di reclutamento", clubPost: "Cercasi attaccante U23 disponibile rapidamente. Priorità ai profili con video, statistiche e referenze verificabili.",
+    profilesTitle: "Tutti i talenti e le professioni del calcio", profilesIntro: "Giocatori, staff, area medica, direzione, reclutamento, amministrazione, logistica, marketing e ogni professionista del calcio.",
+    newProfile: "Crea profilo", filter: "Cerca per nome, ruolo, paese, club o disponibilità...",
+    organizationsTitle: "Club, accademie, agenzie e organizzazioni", organizationsIntro: "Trova una struttura, identifica i responsabili e contatta direttamente le persone giuste.",
+    opportunitiesTitle: "Opportunità in tutto l'ecosistema del calcio", opportunitiesIntro: "Lavori, incarichi, provini, reclutamento sportivo e richieste di servizi.",
+    messagesTitle: "Collegamenti e conversazioni professionali", messagesIntro: "Comunica direttamente con persone e organizzazioni della tua rete.",
+    open: "Aperto", applications: "Candidature", toHandle: "Da gestire", fresh: "Nuovo",
+    roles: ["Giocatore", "Allenatore", "Vice allenatore", "Preparatore atletico", "Medico sportivo", "Fisioterapista", "Osteopata", "Video analyst", "Scout", "Agente", "Presidente del club", "Direttore generale", "Responsabile marketing", "Responsabile logistica", "Responsabile amministrativo"]
+  },
+  pt: {
+    label: "Português", dir: "ltr",
+    nav: ["Início", "Perfis", "Organizações", "Recrutamento", "Mensagens"],
+    search: "Pesquisar pessoa, função ou clube...",
+    notifications: "Notificações", you: "Você",
+    mission: "A rede profissional mundial para todos os intervenientes do futebol",
+    metrics: ["Visitas ao perfil", "Aparições nas pesquisas", "Ligações no futebol"],
+    complete: "Completar o meu perfil profissional",
+    quick: "Acesso rápido", quickLinks: ["Criar o meu perfil", "Reivindicar uma organização", "Publicar uma necessidade"],
+    followed: "Oportunidades seguidas", live: "AO VIVO",
+    opportunityItems: ["Procura-se avançado U23", "Teste para guarda-redes sénior", "Procura-se analista de vídeo"],
+    newsTitle: "Notícias do futebol", newsSub: "Destaques de hoje",
+    news: ["Mercado: os perfis U23 mais seguidos", "Clubes aceleram o recrutamento por vídeo", "Novas funções transformam as equipas técnicas", "JustRate publica o índice semanal"],
+    recent: "Oportunidades recentes", readers: "leitores",
+    justrateTitle: "Ligação JustRate", justrateText: "Ligue um perfil desportivo verificado para mostrar jogos, estatísticas e índice JRI.", justrateCta: "Ligar perfil JustRate",
+    bridge: "JustRate: verificação pendente",
+    hello: "Olá Mohamed, qual é o seu objetivo hoje?",
+    purpose: "Football Network liga diretamente todas as profissões do futebol: campo, equipa técnica, saúde, direção, recrutamento, logística e marketing.",
+    recruit: "Estou a recrutar", network: "Expandir a minha rede",
+    startPost: "Criar publicação", composer: ["Vídeo", "Foto", "Estatísticas", "Recrutamento"],
+    sort: "Ordenar por: Relevância", newPosts: "Novas publicações",
+    postStatus: "Ponta de lança · Disponível agora", postText: "Novo vídeo adicionado: desmarcações em profundidade, velocidade de execução, finalização e sequências de jogo. Perfil visível para clubes, recrutadores e agentes verificados.",
+    connected: "Ligado ao JustRate", statLabels: ["jogos", "golos", "assistências"], jri: "Índice JRI", featured: "Vídeo em destaque", keyActions: "Ações-chave e estatísticas JustRate",
+    actions: ["Recomendar", "Comentar", "Partilhar", "Pré-selecionar"],
+    clubStatus: "Clube · Necessidade de recrutamento", clubPost: "Procura-se avançado U23 disponível rapidamente. Prioridade a perfis com vídeo, estatísticas e referências verificáveis.",
+    profilesTitle: "Todos os talentos e profissões do futebol", profilesIntro: "Jogadores, equipas técnicas, saúde, direção, recrutamento, administração, logística, marketing e todos os profissionais do futebol.",
+    newProfile: "Criar perfil", filter: "Pesquisar por nome, função, país, clube ou disponibilidade...",
+    organizationsTitle: "Clubes, academias, agências e organizações", organizationsIntro: "Encontre uma estrutura, identifique os responsáveis e contacte diretamente as pessoas certas.",
+    opportunitiesTitle: "Oportunidades em todo o ecossistema do futebol", opportunitiesIntro: "Empregos, missões, testes, recrutamento desportivo e necessidades de serviços.",
+    messagesTitle: "Ligações e conversas profissionais", messagesIntro: "Comunique diretamente com pessoas e organizações da sua rede.",
+    open: "Aberto", applications: "Candidaturas", toHandle: "A tratar", fresh: "Novo",
+    roles: ["Jogador", "Treinador", "Treinador adjunto", "Preparador físico", "Médico desportivo", "Fisioterapeuta", "Osteopata", "Analista de vídeo", "Olheiro", "Agente", "Presidente do clube", "Diretor-geral", "Responsável de marketing", "Responsável de logística", "Responsável administrativo"]
+  },
+  de: {
+    label: "Deutsch", dir: "ltr",
+    nav: ["Start", "Profile", "Organisationen", "Recruiting", "Nachrichten"],
+    search: "Person, Funktion oder Verein suchen...",
+    notifications: "Mitteilungen", you: "Sie",
+    mission: "Das weltweite berufliche Netzwerk für alle Akteure im Fußball",
+    metrics: ["Profilaufrufe", "Erscheinungen in Suchen", "Fußballkontakte"],
+    complete: "Mein berufliches Profil vervollständigen",
+    quick: "Schnellzugriff", quickLinks: ["Mein Profil erstellen", "Organisation beanspruchen", "Bedarf veröffentlichen"],
+    followed: "Beobachtete Chancen", live: "LIVE",
+    opportunityItems: ["U23-Stürmer gesucht", "Probetraining für erfahrenen Torwart", "Videoanalyst gesucht"],
+    newsTitle: "Fußball-News", newsSub: "Heute im Fokus",
+    news: ["Transfermarkt: die meistbeachteten U23-Profile", "Vereine beschleunigen videobasiertes Recruiting", "Neue Berufe verändern die Trainerstäbe", "JustRate veröffentlicht den Wochenindex"],
+    recent: "Neue Chancen", readers: "Leser",
+    justrateTitle: "JustRate verbinden", justrateText: "Verknüpfen Sie ein verifiziertes Sportprofil, um Spiele, Statistiken und den JRI-Index anzuzeigen.", justrateCta: "JustRate-Profil verbinden",
+    bridge: "JustRate: Prüfung ausstehend",
+    hello: "Hallo Mohamed, was ist heute Ihr Ziel?",
+    purpose: "Football Network verbindet alle Fußballberufe direkt: Spielfeld, Trainerstab, Medizin, Management, Recruiting, Logistik und Marketing.",
+    recruit: "Ich rekrutiere", network: "Mein Netzwerk ausbauen",
+    startPost: "Beitrag erstellen", composer: ["Video", "Foto", "Statistiken", "Recruiting"],
+    sort: "Sortieren nach: Relevanz", newPosts: "Neue Beiträge",
+    postStatus: "Mittelstürmer · Sofort verfügbar", postText: "Neues Video hinzugefügt: Tiefenläufe, Handlungsschnelligkeit, Abschluss und Spielszenen. Profil sichtbar für verifizierte Vereine, Scouts und Agenten.",
+    connected: "Mit JustRate verbunden", statLabels: ["Spiele", "Tore", "Vorlagen"], jri: "JRI-Index", featured: "Video im Fokus", keyActions: "Schlüsselszenen und JustRate-Statistiken",
+    actions: ["Empfehlen", "Kommentieren", "Teilen", "Vormerken"],
+    clubStatus: "Verein · Recruiting-Bedarf", clubPost: "U23-Stürmer kurzfristig gesucht. Bevorzugt werden Profile mit Video, Statistiken und überprüfbaren Referenzen.",
+    profilesTitle: "Alle Talente und Berufe im Fußball", profilesIntro: "Spieler, Trainerstäbe, Medizin, Management, Recruiting, Verwaltung, Logistik, Marketing und alle Fußballprofis.",
+    newProfile: "Profil erstellen", filter: "Nach Name, Funktion, Land, Verein oder Verfügbarkeit suchen...",
+    organizationsTitle: "Vereine, Akademien, Agenturen und Organisationen", organizationsIntro: "Organisation finden, Verantwortliche identifizieren und die richtigen Personen direkt kontaktieren.",
+    opportunitiesTitle: "Chancen im gesamten Fußball-Ökosystem", opportunitiesIntro: "Jobs, Aufträge, Probetrainings, sportliches Recruiting und Dienstleistungen.",
+    messagesTitle: "Berufliche Kontakte und Gespräche", messagesIntro: "Kommunizieren Sie direkt mit Personen und Organisationen in Ihrem Netzwerk.",
+    open: "Offen", applications: "Bewerbungen", toHandle: "Zu bearbeiten", fresh: "Neu",
+    roles: ["Spieler", "Cheftrainer", "Co-Trainer", "Athletiktrainer", "Sportarzt", "Physiotherapeut", "Osteopath", "Videoanalyst", "Scout", "Spielerberater", "Vereinspräsident", "Geschäftsführer", "Marketingleiter", "Logistikleiter", "Verwaltungsleiter"]
+  },
+  nl: {
+    label: "Nederlands", dir: "ltr",
+    nav: ["Start", "Profielen", "Organisaties", "Werving", "Berichten"],
+    search: "Zoek een persoon, functie of club...",
+    notifications: "Meldingen", you: "U",
+    mission: "Het wereldwijde professionele netwerk voor iedereen in het voetbal",
+    metrics: ["Profielweergaven", "Vermeldingen in zoekopdrachten", "Voetbalconnecties"],
+    complete: "Mijn professionele profiel voltooien",
+    quick: "Snelle toegang", quickLinks: ["Mijn profiel maken", "Organisatie claimen", "Behoefte publiceren"],
+    followed: "Gevolgde kansen", live: "LIVE",
+    opportunityItems: ["U23-spits gezocht", "Proeftraining ervaren doelman", "Videoanalist gezocht"],
+    newsTitle: "Voetbalnieuws", newsSub: "Vandaag in het nieuws",
+    news: ["Transfermarkt: meest gevolgde U23-profielen", "Clubs versnellen videowerving", "Nieuwe functies veranderen technische staf", "JustRate publiceert de weekindex"],
+    recent: "Recente kansen", readers: "lezers",
+    justrateTitle: "JustRate koppelen", justrateText: "Koppel een geverifieerd sportprofiel om wedstrijden, statistieken en de JRI-index te tonen.", justrateCta: "JustRate-profiel koppelen",
+    bridge: "JustRate: verificatie in behandeling",
+    hello: "Hallo Mohamed, wat is vandaag uw doel?",
+    purpose: "Football Network verbindt alle voetbalberoepen rechtstreeks: veld, staf, medisch, directie, werving, logistiek en marketing.",
+    recruit: "Ik werf", network: "Mijn netwerk uitbreiden",
+    startPost: "Een bericht plaatsen", composer: ["Video", "Foto", "Statistieken", "Werving"],
+    sort: "Sorteren op: Relevantie", newPosts: "Nieuwe berichten",
+    postStatus: "Centrumspits · Nu beschikbaar", postText: "Nieuwe video toegevoegd: diepteloopacties, handelingssnelheid, afwerking en wedstrijdfragmenten. Profiel zichtbaar voor geverifieerde clubs, scouts en agenten.",
+    connected: "Gekoppeld aan JustRate", statLabels: ["wedstrijden", "doelpunten", "assists"], jri: "JRI-index", featured: "Uitgelichte video", keyActions: "Belangrijke acties en JustRate-statistieken",
+    actions: ["Aanbevelen", "Reageren", "Delen", "Shortlist"],
+    clubStatus: "Club · Wervingsbehoefte", clubPost: "U23-spits op korte termijn gezocht. Voorkeur voor profielen met video, statistieken en verifieerbare referenties.",
+    profilesTitle: "Alle talenten en functies in het voetbal", profilesIntro: "Spelers, staf, medisch, directie, werving, administratie, logistiek, marketing en iedere voetbalprofessional.",
+    newProfile: "Profiel maken", filter: "Zoeken op naam, functie, land, club of beschikbaarheid...",
+    organizationsTitle: "Clubs, academies, bureaus en organisaties", organizationsIntro: "Vind een organisatie, identificeer beslissers en neem rechtstreeks contact op met de juiste personen.",
+    opportunitiesTitle: "Kansen in het volledige voetbalecosysteem", opportunitiesIntro: "Banen, opdrachten, proeftrainingen, sportieve werving en dienstverlening.",
+    messagesTitle: "Professionele connecties en gesprekken", messagesIntro: "Communiceer rechtstreeks met mensen en organisaties in uw netwerk.",
+    open: "Open", applications: "Sollicitaties", toHandle: "Te behandelen", fresh: "Nieuw",
+    roles: ["Speler", "Hoofdtrainer", "Assistent-trainer", "Conditietrainer", "Sportarts", "Fysiotherapeut", "Osteopaat", "Videoanalist", "Scout", "Makelaar", "Clubvoorzitter", "Algemeen directeur", "Marketingmanager", "Logistiek manager", "Administratief manager"]
+  },
+  ar: {
+    label: "العربية", dir: "rtl",
+    nav: ["الرئيسية", "الملفات", "المؤسسات", "التوظيف", "الرسائل"],
+    search: "ابحث عن شخص أو مهنة أو نادٍ...",
+    notifications: "الإشعارات", you: "حسابك",
+    mission: "الشبكة المهنية العالمية لجميع العاملين في كرة القدم",
+    metrics: ["مشاهدات الملف", "الظهور في البحث", "علاقات كرة القدم"],
+    complete: "استكمال ملفي المهني",
+    quick: "وصول سريع", quickLinks: ["إنشاء ملفي", "المطالبة بمؤسسة", "نشر احتياج"],
+    followed: "الفرص المتابعة", live: "مباشر",
+    opportunityItems: ["مطلوب مهاجم تحت 23 سنة", "اختبار حارس مرمى أول", "مطلوب محلل فيديو"],
+    newsTitle: "أخبار كرة القدم", newsSub: "أبرز أخبار اليوم",
+    news: ["سوق الانتقالات: أكثر ملفات تحت 23 سنة متابعة", "الأندية تسرّع التوظيف عبر الفيديو", "مهن جديدة تغيّر الأجهزة الفنية", "JustRate ينشر مؤشر الأسبوع"],
+    recent: "أحدث الفرص", readers: "قارئ",
+    justrateTitle: "ربط JustRate", justrateText: "اربط ملفاً رياضياً موثقاً لعرض المباريات والإحصاءات ومؤشر JRI.", justrateCta: "ربط ملف JustRate",
+    bridge: "JustRate: التحقق قيد الانتظار",
+    hello: "مرحباً محمد، ما هدفك اليوم؟",
+    purpose: "تربط Football Network مباشرة جميع مهن كرة القدم: الملعب، الطاقم، الطب، الإدارة، التوظيف، اللوجستيك والتسويق.",
+    recruit: "أبحث عن مواهب", network: "أوسّع شبكة علاقاتي",
+    startPost: "ابدأ منشوراً", composer: ["فيديو", "صورة", "إحصاءات", "توظيف"],
+    sort: "الترتيب حسب: الأهمية", newPosts: "منشورات جديدة",
+    postStatus: "مهاجم صريح · متاح الآن", postText: "تمت إضافة فيديو جديد: التحرك في العمق، سرعة التنفيذ، الإنهاء ولقطات المباريات. الملف متاح للأندية والكشافين والوكلاء الموثقين.",
+    connected: "مرتبط بـ JustRate", statLabels: ["مباراة", "هدفاً", "تمريرة حاسمة"], jri: "مؤشر JRI", featured: "فيديو مميز", keyActions: "اللقطات الرئيسية وإحصاءات JustRate",
+    actions: ["توصية", "تعليق", "مشاركة", "القائمة المختصرة"],
+    clubStatus: "نادٍ · احتياج توظيف", clubPost: "مطلوب مهاجم تحت 23 سنة في أقرب وقت. الأولوية للملفات التي تتضمن فيديو وإحصاءات ومراجع قابلة للتحقق.",
+    profilesTitle: "كل المواهب والمهن في عالم كرة القدم", profilesIntro: "اللاعبون والأجهزة الفنية والطبية والإدارة والتوظيف والإدارة المكتبية واللوجستيك والتسويق وجميع محترفي كرة القدم.",
+    newProfile: "إنشاء ملف", filter: "ابحث بالاسم أو المهنة أو البلد أو النادي أو التوفر...",
+    organizationsTitle: "الأندية والأكاديميات والوكالات والمؤسسات", organizationsIntro: "ابحث عن مؤسسة وحدد المسؤولين وتواصل مباشرة مع الأشخاص المناسبين.",
+    opportunitiesTitle: "فرص في جميع مجالات كرة القدم", opportunitiesIntro: "وظائف ومهام واختبارات وتوظيف رياضي واحتياجات خدمات.",
+    messagesTitle: "علاقات ومحادثات مهنية", messagesIntro: "تواصل مباشرة مع الأشخاص والمؤسسات في شبكتك.",
+    open: "مفتوح", applications: "طلبات", toHandle: "يتطلب متابعة", fresh: "جديد",
+    roles: ["لاعب", "مدرب", "مدرب مساعد", "معد بدني", "طبيب رياضي", "أخصائي علاج طبيعي", "أخصائي تقويم", "محلل فيديو", "كشاف", "وكيل لاعبين", "رئيس نادٍ", "مدير عام", "مسؤول تسويق", "مسؤول لوجستيك", "مسؤول إداري"]
+  },
+  tr: {
+    label: "Türkçe", dir: "ltr",
+    nav: ["Ana sayfa", "Profiller", "Kuruluşlar", "İşe alım", "Mesajlar"],
+    search: "Kişi, görev veya kulüp ara...",
+    notifications: "Bildirimler", you: "Siz",
+    mission: "Futboldaki tüm paydaşlar için küresel profesyonel ağ",
+    metrics: ["Profil görüntüleme", "Aramalarda görünme", "Futbol bağlantıları"],
+    complete: "Profesyonel profilimi tamamla",
+    quick: "Hızlı erişim", quickLinks: ["Profilimi oluştur", "Kuruluşu sahiplen", "İhtiyaç yayınla"],
+    followed: "Takip edilen fırsatlar", live: "CANLI",
+    opportunityItems: ["U23 forvet aranıyor", "Kıdemli kaleci seçmesi", "Video analisti aranıyor"],
+    newsTitle: "Futbol haberleri", newsSub: "Bugünün öne çıkanları",
+    news: ["Transfer: en çok takip edilen U23 profilleri", "Kulüpler video tabanlı işe alımı hızlandırıyor", "Yeni roller teknik ekipleri dönüştürüyor", "JustRate haftalık endeksini yayınladı"],
+    recent: "Yeni fırsatlar", readers: "okuyucu",
+    justrateTitle: "JustRate bağlantısı", justrateText: "Maçları, istatistikleri ve JRI endeksini göstermek için doğrulanmış spor profilini bağlayın.", justrateCta: "JustRate profilini bağla",
+    bridge: "JustRate: doğrulama bekliyor",
+    hello: "Merhaba Mohamed, bugünkü hedefiniz nedir?",
+    purpose: "Football Network futboldaki tüm meslekleri doğrudan bağlar: saha, teknik ekip, sağlık, yönetim, işe alım, lojistik ve pazarlama.",
+    recruit: "İşe alım yapıyorum", network: "Ağımı büyüt",
+    startPost: "Gönderi oluştur", composer: ["Video", "Fotoğraf", "İstatistik", "İşe alım"],
+    sort: "Sırala: Alaka düzeyi", newPosts: "Yeni gönderiler",
+    postStatus: "Santrfor · Şimdi müsait", postText: "Yeni video eklendi: derin koşular, uygulama hızı, bitiricilik ve maç sekansları. Profil doğrulanmış kulüplere, gözlemcilere ve menajerlere görünür.",
+    connected: "JustRate'e bağlı", statLabels: ["maç", "gol", "asist"], jri: "JRI endeksi", featured: "Öne çıkan video", keyActions: "Önemli aksiyonlar ve JustRate istatistikleri",
+    actions: ["Öner", "Yorum yap", "Paylaş", "Kısa liste"],
+    clubStatus: "Kulüp · İşe alım ihtiyacı", clubPost: "Kısa sürede U23 forvet aranıyor. Video, istatistik ve doğrulanabilir referans içeren profillere öncelik verilecektir.",
+    profilesTitle: "Futboldaki tüm yetenekler ve meslekler", profilesIntro: "Oyuncular, teknik ekipler, sağlık, yönetim, işe alım, idari işler, lojistik, pazarlama ve tüm futbol profesyonelleri.",
+    newProfile: "Profil oluştur", filter: "İsim, görev, ülke, kulüp veya uygunluğa göre ara...",
+    organizationsTitle: "Kulüpler, akademiler, ajanslar ve kuruluşlar", organizationsIntro: "Bir kuruluş bulun, karar vericileri belirleyin ve doğru kişilerle doğrudan iletişime geçin.",
+    opportunitiesTitle: "Futbol ekosisteminin tamamındaki fırsatlar", opportunitiesIntro: "İşler, görevler, seçmeler, sportif işe alım ve hizmet ihtiyaçları.",
+    messagesTitle: "Profesyonel bağlantılar ve konuşmalar", messagesIntro: "Ağınızdaki kişi ve kuruluşlarla doğrudan iletişim kurun.",
+    open: "Açık", applications: "Başvurular", toHandle: "İşlem bekliyor", fresh: "Yeni",
+    roles: ["Oyuncu", "Teknik direktör", "Yardımcı antrenör", "Kondisyoner", "Spor doktoru", "Fizyoterapist", "Osteopat", "Video analisti", "Gözlemci", "Menajer", "Kulüp başkanı", "Genel müdür", "Pazarlama yöneticisi", "Lojistik yöneticisi", "İdari yönetici"]
+  }
+};
 
 const css = `
-:root{--bg:#07070d;--surface:#10111b;--surface2:#151827;--ink:#eef3e8;--soft:#d9e2d3;--muted:#9aa6bb;--faint:#6f7b91;--line:#24283a;--line2:#1b2030;--accent:#a8e600;--accent-soft:#8fd600;--green:#32d66f;--blue:#2d6cff;--gold:#ffc247;--danger:#ff5b64}
+:root{--bg:#06070b;--surface:#0d1017;--surface2:#111621;--ink:#f3f6f0;--soft:#d7ddd4;--muted:#8e99a9;--faint:#667184;--line:#232936;--line2:#191f2a;--accent:#a8df2d;--blue:#4f86e8;--gold:#ffc247;--danger:#ff626a}
 *{box-sizing:border-box}
-html,body{margin:0;height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;font-size:14px;line-height:1.45;font-weight:400;text-rendering:geometricPrecision;-webkit-font-smoothing:antialiased}
-a{color:inherit;text-decoration:none}button,input,select{font:inherit}.shell{height:100vh;background:#07070d}.network-topbar{height:56px;background:#080912;border-bottom:1px solid var(--line2);display:grid;grid-template-columns:44px minmax(220px,340px) 1fr auto;gap:14px;align-items:center;padding:0 max(24px,calc((100vw - 1180px)/2));position:sticky;top:0;z-index:10}.brand-mark{display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:8px;background:#111827;border:1px solid #284317;color:var(--accent);font-weight:750;font-size:15px;letter-spacing:.01em}.global-search input{width:100%;min-width:0;border-radius:999px;border:1px solid #202638;background:#101421;color:var(--ink);padding:9px 14px;font-size:13px;font-weight:400;outline:none}.global-search input::placeholder{color:#7f8a9f}.top-nav{display:flex;justify-content:center;gap:6px}.top-nav a{min-width:78px;padding:18px 8px 14px;text-align:center;font-size:12px;line-height:1;font-weight:500;color:#9aa6bb;border-bottom:2px solid transparent}.top-nav a.active,.top-nav a:hover{color:var(--accent);border-bottom-color:var(--accent)}.top-actions{display:flex;gap:7px}.top-actions button{border:1px solid var(--line);border-radius:999px;background:#101421;color:#dce5d6;padding:7px 11px;font-size:12px;font-weight:500}.layout-frame{height:calc(100vh - 56px);max-width:1500px;margin:0 auto;padding:18px 24px;display:grid;grid-template-columns:340px minmax(560px,1fr) 365px;gap:16px;overflow:hidden}.fixed-rail{max-height:calc(100vh - 92px);overflow:hidden}.left-rail,.right-rail,.center-feed{display:grid;gap:13px}.center-scroll{min-height:0;overflow-y:auto;padding-right:4px;scrollbar-color:#3d4357 transparent;scrollbar-width:thin}.jr-panel,.jr-score-card,.feed-card,.composer-card,.card{background:var(--surface);border:1px solid var(--line2);border-radius:8px;overflow:hidden}.app-status{display:flex;justify-content:space-between;margin-bottom:10px;color:var(--muted);font-size:12px;font-weight:500}.app-status strong{color:var(--soft);font-weight:600}.profile-cover{height:68px;background:radial-gradient(circle at 24% 8%,rgba(168,230,0,.38),transparent 25%),linear-gradient(135deg,#102b12,#0b1423)}.profile-body{display:grid;gap:7px;padding:0 16px 15px;text-align:center}.profile-photo,.avatar{display:flex;align-items:center;justify-content:center;border-radius:50%;background:#111827;color:var(--accent);font-weight:700}.profile-photo{width:70px;height:70px;margin:-35px auto 0;border:2px solid #f0f4ee;font-size:15px}.profile-body h2,.profile-body p,.side-widget h3{margin:0}.profile-body h2{font-size:16px;line-height:1.2;font-weight:650;color:#f2f6ed}.profile-body p,.muted{color:var(--muted);font-size:12px;line-height:1.45;font-weight:400}.profile-stats{border-top:1px solid var(--line);display:grid;gap:7px;margin-top:8px;padding-top:11px;text-align:left}.profile-stats span{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;font-weight:500}.profile-stats strong{color:var(--accent);font-weight:650}.side-widget{display:grid;gap:9px;padding:15px}.side-widget h3{font-size:15px;line-height:1.25;font-weight:650;color:#f0f5ea}.side-widget a{display:grid;gap:3px;color:var(--muted);font-size:12px;line-height:1.4;font-weight:450}.side-widget strong{color:var(--soft);font-weight:600}.widget-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:10px}.widget-tabs button,.composer-actions button,.button{border:1px solid rgba(91,140,43,.55);background:#102316;color:var(--accent);font-weight:600;border-radius:6px;padding:8px 10px;font-size:12px;line-height:1.1}.widget-tabs button.active,.button.primary{background:#173414;border-color:#4b7d19}.match-list-widget h3{font-size:11px;text-transform:uppercase;letter-spacing:.055em;color:#9ca8bd;margin:7px 14px;font-weight:650}.mini-match{display:grid;gap:3px;padding:9px 14px;border-top:1px solid var(--line);font-size:12px}.mini-match.active{background:rgba(45,108,255,.075)}.mini-match span{color:var(--danger);font-size:10px;font-weight:700}.mini-match strong{font-size:12px;font-weight:650}.mini-match em{color:var(--muted);font-style:normal;font-size:12px}.ranking-widget{padding:12px}.talent-card{display:grid;grid-template-columns:40px 1fr auto;gap:10px;align-items:center;background:#062412;border:1px solid #0a7531;border-radius:8px;padding:10px;margin-bottom:14px}.avatar{width:38px;height:38px;font-size:13px}.talent-card strong{font-size:14px;font-weight:650}.talent-card span,.rank-row em{display:block;color:var(--muted);font-size:11px;font-style:normal;font-weight:400}.talent-card b,.rank-row b{color:var(--accent);font-weight:650}.ranking-widget h3{margin:10px 4px;color:#9ca8bd;font-size:11px;text-transform:uppercase;letter-spacing:.07em;font-weight:650}.rank-row{display:grid;grid-template-columns:24px 1fr auto;gap:10px;align-items:center;border-top:1px solid var(--line);padding:10px 4px}.rank-row>span{color:var(--gold);font-weight:650}.rank-row strong{font-size:13px;font-weight:650}.justrate-sync{padding:15px;border-color:#0a7531}.justrate-sync h3{margin:0 0 12px;font-size:16px;font-weight:650}.justrate-sync p{color:var(--muted);font-size:12px;line-height:1.55}.justrate-sync button{width:100%;background:var(--accent);border:0;color:#10111b;font-weight:700;border-radius:6px;padding:10px;font-size:13px}.jr-score-card{padding:25px 32px;background:radial-gradient(circle at 50% 0,rgba(21,100,35,.48),transparent 55%),#07120b}.score-meta{display:flex;justify-content:space-between;color:#8d9ab0;font-size:10.5px;text-transform:uppercase;letter-spacing:.075em;font-weight:650}.score-meta strong{color:#dfe8d9;font-weight:650}.score-board{display:grid;grid-template-columns:1fr 150px 1fr;gap:18px;align-items:center;text-align:center;margin:19px 0}.club-badge{width:62px;height:62px;margin:0 auto 8px;border-radius:15px;display:grid;place-items:center;background:#13253a;color:var(--accent);border:1px solid #24451b;font-weight:750;font-size:15px}.club-badge.alt{background:#1b1734;color:#fff}.team-side strong{display:block;font-size:15px;line-height:1.2;font-weight:650}.team-side span{color:var(--muted);font-size:12px}.main-score span{display:block;color:var(--danger);font-weight:700;font-size:10.5px;letter-spacing:.04em}.main-score strong{display:block;color:var(--accent);font-size:55px;line-height:.95;font-weight:700}.main-score em{font-style:normal;color:#fff;background:#1c2632;border-radius:999px;padding:4px 9px;font-size:11px;font-weight:500}.score-details{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}.score-details span,.tag{border:1px solid var(--line);background:#121522;border-radius:999px;color:var(--muted);font-size:11px;font-weight:500;padding:5px 8px}.composer-card{padding:13px}.composer-line{display:grid;grid-template-columns:40px 1fr;gap:12px;align-items:center}.composer-line button{border:1px solid var(--line);background:#0d1018;color:var(--muted);border-radius:999px;text-align:left;padding:10px 15px;font-size:13px;font-weight:400}.composer-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:11px}.feed-card{padding:15px}.post-author{display:grid;grid-template-columns:42px 1fr;gap:10px;align-items:center}.post-author strong{font-size:13px;font-weight:650}.post-author span{display:block;color:var(--muted);font-size:12px}.feed-card p{line-height:1.58;color:#d9e2d3;font-size:14px;font-weight:400}.football-media{height:250px;border-radius:8px;border:1px solid #0b5e2c;background:linear-gradient(135deg,#07120b,#0b2f16 45%,#11284d);display:grid;place-items:end start;padding:20px;margin:13px 0}.football-media strong{display:block;font-size:21px;line-height:1.15;font-weight:650}.football-media span{color:var(--accent);font-weight:700;text-transform:uppercase;font-size:10.5px;letter-spacing:.055em}.post-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;border-top:1px solid var(--line);padding-top:11px}.post-actions button{background:transparent;border:0;color:var(--muted);font-weight:550;font-size:12px}.job-strip,.tag-row,.stat-line{display:flex;gap:8px;flex-wrap:wrap}.job-strip span{border:1px solid #24451b;background:#102015;border-radius:6px;padding:7px 9px;color:var(--accent);font-size:12px;font-weight:550}.topbar{display:flex;gap:10px;margin-bottom:14px}.search{flex:1;background:#121522;border:1px solid var(--line);border-radius:999px;color:var(--ink);padding:10px 14px;font-size:13px}.page-heading{padding:19px;background:linear-gradient(135deg,#10111b,#0b1c13);border:1px solid var(--line);border-radius:8px}.page-heading h1{margin:4px 0 6px;font-size:23px;line-height:1.2;font-weight:650}.eyebrow{color:var(--accent);font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.065em}.filter-bar,.grid{display:grid;gap:12px}.filter-bar{grid-template-columns:repeat(3,1fr) auto}.filter-bar select{background:#121522;border:1px solid var(--line);border-radius:6px;color:var(--ink);padding:9px 10px;font-size:13px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.card{padding:15px}.card h3{margin:11px 0 4px;font-size:15px;font-weight:650}.card-header{display:flex;justify-content:space-between;align-items:center}.completion{display:grid;gap:7px;margin:13px 0;color:var(--muted);font-size:12px}.completion div{height:6px;background:#222638;border-radius:999px;overflow:hidden}.completion i{display:block;height:100%;background:var(--accent)}.stat-line{justify-content:space-between;border-top:1px solid var(--line);padding-top:11px}.stat strong{display:block;color:var(--accent);font-size:20px;font-weight:650}.message-row,.opp-row,.club-row{display:grid;gap:7px;border-top:1px solid var(--line);padding:13px 0}.message-row:first-child,.opp-row:first-child,.club-row:first-child{border-top:0}.status{color:var(--accent);font-weight:650;font-size:12px}@media (max-width:1100px){html,body{overflow:auto}.network-topbar{grid-template-columns:42px 1fr;min-height:auto;height:auto;padding:12px}.top-nav,.top-actions{grid-column:1/-1;justify-content:flex-start;overflow:auto}.layout-frame{height:auto;grid-template-columns:1fr;padding:12px}.fixed-rail{display:none}.center-scroll{overflow:visible}.grid,.filter-bar{grid-template-columns:1fr}.score-board{grid-template-columns:1fr}.main-score strong{font-size:46px}}`;
+html,body{margin:0;height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font-family:"Inter","Noto Sans Arabic","Segoe UI",Arial,sans-serif;font-size:13px;line-height:1.5;font-weight:400;letter-spacing:0;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}button,input,select{font:inherit;letter-spacing:0}.shell{height:100vh;background:var(--bg)}
+.network-topbar{height:58px;display:grid;grid-template-columns:170px minmax(220px,280px) 1fr auto;gap:16px;align-items:center;padding:0 max(20px,calc((100vw - 1280px)/2));background:#07080d;border-bottom:1px solid #1a202b;box-shadow:0 8px 28px rgba(0,0,0,.18);position:sticky;top:0;z-index:10}
+.brand-lockup{display:flex;align-items:center;gap:9px;color:#f5f7f2;font-size:13px;font-weight:650;white-space:nowrap}.brand-mark{display:grid;place-items:center;width:32px;height:32px;border-radius:7px;background:#101720;border:1px solid #35511d;color:var(--accent);font-weight:700}
+.global-search input{width:100%;height:36px;border:1px solid #202733;border-radius:7px;background:#0d111a;color:#e7ece4;padding:8px 12px;font-size:12px;outline:none}.global-search input:focus{border-color:#587a26;box-shadow:0 0 0 3px rgba(168,223,45,.08)}.global-search input::placeholder{color:#778293}
+.top-nav{height:58px;display:flex;justify-content:center;align-items:stretch;gap:2px}.top-nav a{position:relative;display:flex;align-items:center;justify-content:center;min-width:74px;padding:0 9px;color:#8995a6;font-size:11.5px;font-weight:500}.top-nav a:after{content:"";position:absolute;left:20%;right:20%;bottom:0;height:2px;background:transparent}.top-nav a.active,.top-nav a:hover{color:#eef3e9}.top-nav a.active:after{background:var(--accent)}
+.top-actions{display:flex;align-items:center;gap:6px}.top-actions button,.language-select{height:32px;border:1px solid #202733;border-radius:7px;background:#0d111a;color:#aab3c0;padding:0 9px;font-size:11px;font-weight:500}.language-select{max-width:108px}
+.layout-frame{height:calc(100vh - 58px);max-width:1320px;margin:0 auto;padding:16px 20px;display:grid;grid-template-columns:260px minmax(590px,1fr) 300px;gap:14px;overflow:hidden}.fixed-rail{max-height:calc(100vh - 90px);overflow:hidden}.left-rail,.right-rail,.center-feed{display:grid;gap:11px}.center-scroll{min-height:0;overflow-y:auto;padding-right:5px;scrollbar-color:#3d4357 transparent;scrollbar-width:thin}
+.panel,.feed-card,.composer-card,.welcome-card,.page-heading,.profile-card{background:var(--surface);border:1px solid var(--line2);border-radius:7px;overflow:hidden}.app-status{display:flex;justify-content:space-between;margin:0 1px 9px;color:#707c8f;font-size:10.5px}.app-status strong{color:#cfd6cd;font-size:11px;font-weight:600}
+.profile-cover{height:58px;background:#102013}.profile-body{display:grid;gap:5px;padding:0 14px 13px;text-align:center}.profile-photo,.avatar{display:grid;place-items:center;border-radius:50%;background:#111827;color:var(--accent);font-weight:650}.profile-photo{width:60px;height:60px;margin:-30px auto 0;border:2px solid #dce3da;font-size:13px}.profile-body h2,.profile-body p{margin:0}.profile-body h2{font-size:14px;font-weight:600}.profile-body p,.muted{color:var(--muted);font-size:11.5px}
+.network-metrics{display:grid;padding:4px 0}.metric-row{display:flex;justify-content:space-between;padding:9px 13px;color:#a2acba;font-size:11px}.metric-row+.metric-row{border-top:1px solid #181e29}.metric-row strong{color:#b4e95a;font-size:11px;font-weight:600}.metric-cta{padding:10px 13px;border-top:1px solid #202633;color:#cfd5cd;font-size:11px;font-weight:550}
+.side-widget{display:grid;gap:8px;padding:13px}.side-widget h3,.football-news h3{margin:0;font-size:13.5px;font-weight:600}.side-widget a{display:grid;gap:2px;color:#919cad;font-size:11.5px}.side-widget a strong{color:#d8ded5;font-weight:550}.followed h3{margin:0;padding:10px 12px;color:#778397;font-size:9.5px;text-transform:uppercase}.mini-item{display:grid;gap:2px;padding:8px 12px;border-top:1px solid var(--line);font-size:11px}.mini-item.active{border-inline-start:2px solid var(--blue);background:rgba(57,108,219,.07)}.mini-item span{color:var(--danger);font-size:9.5px;font-weight:650}.mini-item strong{font-weight:600}.mini-item em{color:var(--muted);font-style:normal}
+.football-news{padding:13px}.football-news>span{color:#748094;font-size:10.5px}.news-list{display:grid;gap:10px;margin-top:12px}.news-item{display:grid;gap:1px}.news-item strong{color:#dbe1d9;font-size:11.5px;font-weight:550}.news-item span{color:#748094;font-size:10px}
+.ranking{padding:11px}.ranking h3{margin:0 0 7px;color:#778397;font-size:9.5px;text-transform:uppercase}.rank-row{display:grid;grid-template-columns:20px 1fr auto;gap:8px;align-items:center;padding:8px 3px;border-top:1px solid var(--line)}.rank-row>span{color:var(--gold);font-size:11px}.rank-row strong{display:block;font-size:11.5px;font-weight:600}.rank-row em{display:block;color:var(--muted);font-size:10.5px;font-style:normal}.rank-row b{color:var(--accent);font-weight:600}
+.justrate{padding:13px;border-color:#205d35}.justrate h3{margin:0 0 8px;font-size:14px;font-weight:600}.justrate p{color:var(--muted);font-size:11.5px}.primary{width:100%;min-height:34px;border:1px solid #557b2a;border-radius:6px;background:#a8df2d;color:#10150b;font-size:11.5px;font-weight:650}
+.welcome-card{position:relative;padding:20px 24px;text-align:center;background:#0d1017}.welcome-avatar{width:70px;height:70px;margin:0 auto 12px;border-radius:50%;display:grid;place-items:center;background:#101820;border:1px solid #37541d;color:var(--accent);font-size:18px;font-weight:700;box-shadow:0 0 0 6px rgba(168,223,45,.045)}.welcome-card h1{margin:0;font-size:16px;line-height:1.3;font-weight:600}.welcome-card p{max-width:560px;margin:7px auto 14px;color:#9aa4b2;font-size:11.5px}.objective-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.objective-actions button{min-height:34px;border-radius:999px;border:1px solid #456628;background:#182313;color:#c7e989;font-size:11.5px;font-weight:600}.objective-actions .secondary{background:transparent;border-color:#344052;color:#aeb7c4}
+.composer-card{padding:11px}.composer-line{display:grid;grid-template-columns:34px 1fr;gap:9px;align-items:center}.avatar{width:34px;height:34px;font-size:11px}.composer-line button{min-height:36px;border:1px solid var(--line);border-radius:999px;background:#0b0f17;color:var(--muted);padding:9px 13px;text-align:start;font-size:11.5px}.composer-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:9px}.composer-actions button{min-height:32px;border:1px solid #283143;border-radius:6px;background:#101720;color:#9aa5b5;font-size:11px;font-weight:550}
+.feed-sort{display:flex;align-items:center;gap:10px;color:#6f7a8c;font-size:10px}.feed-sort:before{content:"";height:1px;flex:1;background:#1b222e}.new-posts{justify-self:center;margin:-2px auto 0;border:1px solid #34551e;border-radius:999px;background:#142010;color:#b9e76d;padding:6px 12px;font-size:10.5px;font-weight:600}.feed-card{padding:13px}.post-author{display:grid;grid-template-columns:36px 1fr;gap:9px;align-items:center}.post-author strong{font-size:12px;font-weight:600}.post-author span{display:block;color:var(--muted);font-size:10.5px}.feed-card p{margin:12px 0;color:#d2d9d0;font-size:12.5px;line-height:1.6}
+.performance-strip{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;margin:11px 0;padding:10px 0;border-top:1px solid #1c4f2c;border-bottom:1px solid #1c4f2c}.performance-player{display:grid;grid-template-columns:38px 1fr;gap:9px;align-items:center}.performance-mark{width:38px;height:38px;border-radius:8px;display:grid;place-items:center;background:#13253a;color:var(--accent);font-weight:700}.performance-player strong{font-size:11.5px}.performance-player span{display:block;color:#788597;font-size:10.5px}.performance-score{text-align:end}.performance-score strong{display:block;color:var(--accent);font-size:24px;line-height:1}.performance-score span{color:#778397;font-size:9.5px}
+.football-media{height:220px;display:grid;place-items:end start;padding:18px;margin:11px 0;border-radius:7px;border:1px solid #185d34;background:#0b2518}.football-media span{display:block;color:var(--accent);font-size:9.5px;text-transform:uppercase}.football-media strong{display:block;font-size:17px;font-weight:600}.post-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding-top:9px;border-top:1px solid var(--line)}.post-actions button{padding:5px;border:0;background:transparent;color:#8d98a8;font-size:11px;font-weight:500}.tag-row{display:flex;gap:6px;flex-wrap:wrap}.tag{padding:4px 7px;border:1px solid #283143;border-radius:999px;background:#10151f;color:#9aa5b5;font-size:10.5px}
+.page-heading{padding:17px}.page-heading h1{margin:0 0 6px;font-size:20px;font-weight:600}.page-heading p{margin:0}.page-tools{display:flex;gap:8px;margin-bottom:12px}.page-tools input{flex:1;min-width:0;border:1px solid var(--line);border-radius:7px;background:#0d111a;color:var(--ink);padding:10px 12px;font-size:11.5px}.page-tools button{border:1px solid #557b2a;border-radius:7px;background:#1a2a14;color:#c7eb78;padding:8px 12px;font-size:11px;font-weight:600}
+.profile-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;margin-top:11px}.profile-card{padding:13px}.profile-card-head{display:flex;justify-content:space-between;align-items:center}.profile-card h3{margin:10px 0 3px;font-size:13.5px;font-weight:600}.profile-card p{margin:0}.profile-card .tag-row{margin-top:10px}.list-card{padding:13px}.list-row{display:grid;gap:5px;padding:12px 0;border-top:1px solid var(--line)}.list-row:first-child{border-top:0}.list-row h3{margin:0;font-size:13px;font-weight:600}.status{color:var(--accent);font-size:11px;font-weight:600}
+html[dir=rtl] body,html[dir=rtl] input,html[dir=rtl] button,html[dir=rtl] select{text-align:right}html[dir=rtl] .layout-frame,html[dir=rtl] .network-topbar{direction:rtl}html[dir=rtl] .post-actions button,html[dir=rtl] .welcome-card{text-align:center}
+@media(max-width:1250px){.network-topbar{grid-template-columns:42px minmax(220px,1fr) auto;height:auto;padding-top:8px}.brand-lockup>span:last-child{display:none}.top-nav{grid-column:1/-1;order:4;height:42px;overflow:auto}.layout-frame{height:calc(100vh - 108px);grid-template-columns:245px minmax(520px,1fr) 275px}.fixed-rail{max-height:calc(100vh - 138px)}}
+@media(max-width:1100px){html,body{overflow:auto}.network-topbar{grid-template-columns:42px 1fr auto;padding:10px 12px}.global-search{grid-column:2}.top-actions{grid-column:3}.top-nav{grid-column:1/-1}.layout-frame{height:auto;grid-template-columns:1fr;padding:12px}.fixed-rail{display:none}.center-scroll{overflow:visible}.profile-grid{grid-template-columns:1fr}}
+@media(max-width:700px){.network-topbar{grid-template-columns:36px 1fr}.top-actions{grid-column:1/-1}.language-select{margin-inline-start:auto}.top-nav{justify-content:flex-start}.top-nav a{min-width:70px}.objective-actions,.composer-actions{grid-template-columns:1fr 1fr}.post-actions{grid-template-columns:1fr 1fr}}
+`;
 
-const shell = (active, main) => `<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Football Network</title><style>${css}</style></head><body><div class="shell"><header class="network-topbar"><a class="brand-mark" href="/">FN</a><div class="global-search"><input placeholder="Rechercher un joueur, un club, un agent..." aria-label="Recherche globale"></div><nav class="top-nav"><a class="${active==='home'?'active':''}" href="/">Accueil</a><a class="${active==='players'?'active':''}" href="/players">Joueurs</a><a class="${active==='clubs'?'active':''}" href="/clubs">Clubs</a><a class="${active==='opportunities'?'active':''}" href="/opportunities">Recrutement</a><a class="${active==='messages'?'active':''}" href="/messages">Messagerie</a></nav><div class="top-actions"><button>Notifications</button><button>Vous</button></div></header><div class="layout-frame"><aside class="left-rail fixed-rail"><section class="jr-panel"><div class="profile-cover"></div><div class="profile-body"><div class="profile-photo">FN</div><h2>Football Network</h2><p>Réseau professionnel mondial du football</p><div class="profile-stats"><span><strong>3</strong> profils joueurs</span><span><strong>3</strong> clubs suivis</span></div></div></section><section class="jr-panel network-metrics"><div class="metric-row"><span>Vues du profil</span><strong>119</strong></div><div class="metric-row"><span>Apparitions dans les recherches</span><strong>257</strong></div><div class="metric-row"><span>Relations football</span><strong>38</strong></div><div class="metric-cta">Compléter mon profil professionnel</div></section><section class="jr-panel match-list-widget"><div class="widget-tabs"><button class="active">Favoris</button><button>Compétitions</button></div><h3>Opportunités suivies</h3><div class="mini-match active"><span>LIVE</span><strong>CODM Meknès</strong><em>Recherche attaquant U23</em></div><div class="mini-match"><span>15:00</span><strong>FC Nantes</strong><em>Essai gardien senior</em></div><div class="mini-match"><span>20:00</span><strong>Académie internationale</strong><em>Analyste vidéo</em></div></section><section class="jr-panel side-widget"><h3>Accès rapide</h3><a href="/players">Créer un profil joueur</a><a href="/clubs">Revendiquer un club</a><a href="/opportunities">Publier un besoin</a></section></aside><main class="center-scroll"><div class="app-status"><strong>Football Network</strong><span>JustRate : pont à connecter</span></div>${main}</main><aside class="right-rail fixed-rail"><section class="jr-panel football-news"><h3>Actualités du football</h3><span>À la une aujourd'hui</span><div class="news-list"><a class="news-item" href="#"><strong>Mercato : les profils U23 les plus suivis</strong><span>Il y a 1 h · 1 248 lecteurs</span></a><a class="news-item" href="#"><strong>Les clubs accélèrent leur recrutement vidéo</strong><span>Il y a 3 h · 864 lecteurs</span></a><a class="news-item" href="#"><strong>Agents : les nouvelles tendances du marché</strong><span>Il y a 5 h · 592 lecteurs</span></a><a class="news-item" href="#"><strong>JustRate publie son indice de la semaine</strong><span>Il y a 8 h · 441 lecteurs</span></a></div></section><section class="jr-panel ranking-widget"><div class="talent-card"><div class="avatar">J</div><div><strong>Pépite de la semaine</strong><span>Profil connecté JustRate</span></div><b>8.3</b></div><h3>Top profils joueurs</h3><div class="rank-row"><span>1</span><div><strong>Yanis Benali</strong><em>Avant-centre</em></div><b>8.5</b></div><div class="rank-row"><span>2</span><div><strong>Adam El Mansouri</strong><em>Milieu relayeur</em></div><b>8.3</b></div><div class="rank-row"><span>3</span><div><strong>Noah Morel</strong><em>Gardien</em></div><b>8.1</b></div></section><section class="jr-panel side-widget"><h3>Opportunités récentes</h3><a href="/opportunities"><strong>Recherche attaquant U23</strong><span>Meknès, Maroc</span></a><a href="/opportunities"><strong>Essai gardien senior</strong><span>Nantes, France</span></a><a href="/opportunities"><strong>Analyste vidéo</strong><span>Paris, France</span></a></section><section class="jr-panel justrate-sync"><h3>Connexion JustRate</h3><p>Lier un profil joueur Football Network à son profil JustRate pour afficher les notes, matchs, statistiques et tendances en temps réel.</p><button>Lier un profil JustRate</button></section></aside></div></div></body></html>`;
+const routeNames = ["home", "profiles", "organizations", "opportunities", "messages"];
+const navRoutes = ["home", "profiles", "organizations", "opportunities", "messages"];
 
-const home = `<section class="center-feed"><article class="welcome-card jr-panel"><button class="welcome-close" aria-label="Fermer">×</button><div class="welcome-avatar">FN</div><h1>Bonjour Mohamed, quel est votre objectif aujourd'hui ?</h1><p>Football Network vous aide à recruter, développer votre réseau et rendre les profils du football plus visibles.</p><div class="objective-actions"><button>Je recrute</button><button class="secondary">Je développe mon réseau</button></div></article><article class="composer-card jr-panel"><div class="composer-line"><div class="avatar">FN</div><button>Commencer une publication</button></div><div class="composer-actions"><button>Vidéo</button><button>Photo</button><button>Statistiques</button><button>Recrutement</button></div></article><div class="feed-sort">Classer par : Pertinence</div><button class="new-posts">Nouvelles publications</button><article class="feed-card jr-panel"><div class="post-author"><div class="avatar">Y</div><div><strong>Yanis Benali</strong><span>Avant-centre · Disponible maintenant</span></div></div><p>Nouvelle vidéo ajoutée : appels en profondeur, vitesse d'exécution, finition et séquences de match. Profil visible par les clubs, recruteurs et agents vérifiés.</p><div class="performance-strip"><div class="performance-player"><div class="club-badge">JR</div><div><strong>Profil connecté à JustRate</strong><span>24 matchs · 14 buts · 5 passes</span></div></div><div class="performance-score"><strong>8.3</strong><span>Indice JRI</span></div></div><div class="football-media"><div><span>Vidéo à la une</span><strong>Actions clés et statistiques JustRate</strong></div></div><div class="post-actions"><button>Recommander</button><button>Commenter</button><button>Partager</button><button>Short-list</button></div></article><article class="feed-card jr-panel"><div class="post-author"><div class="avatar">C</div><div><strong>CODM Meknès</strong><span>Club · Besoin de recrutement</span></div></div><p>Recherche attaquant U23 disponible rapidement. Priorité aux profils avec vidéo, statistiques et références vérifiables.</p><div class="job-strip"><span>Avant-centre</span><span>Botola Pro</span><span>Disponible maintenant</span></div></article></section>`;
-const players = `<div class="topbar"><input class="search" placeholder="Filtrer par nom, poste, pays, club..."><button class="button primary">Nouveau profil joueur</button></div><section class="page-heading"><div class="eyebrow">Base joueurs</div><h1>Recherche et valorisation des profils joueurs</h1><p class="muted">Identifier rapidement les joueurs par poste, disponibilité, pays, statut contractuel et niveau de profil.</p></section><section class="grid" style="margin-top:14px"><article class="card"><div class="card-header"><div class="avatar">Y</div><span class="tag">Profil public</span></div><h3>Yanis Benali</h3><p class="muted">21 ans - Avant-centre - Lyon</p><div class="tag-row"><span class="tag">France</span><span class="tag">Libre</span><span class="tag">Pied droit</span></div><div class="completion"><span>Profil complété à 78%</span><div><i style="width:78%"></i></div></div><div class="stat-line"><div class="stat"><strong>24</strong><span class="muted">matchs</span></div><div class="stat"><strong>14</strong><span class="muted">buts</span></div><div class="stat"><strong>5</strong><span class="muted">passes</span></div></div></article><article class="card"><div class="card-header"><div class="avatar">A</div><span class="tag">Visible recruteurs</span></div><h3>Adam El Mansouri</h3><p class="muted">19 ans - Milieu relayeur - Casablanca</p><div class="tag-row"><span class="tag">Maroc</span><span class="tag">Académie privée</span><span class="tag">JRI 8.3</span></div><div class="completion"><span>Profil complété à 84%</span><div><i style="width:84%"></i></div></div><div class="stat-line"><div class="stat"><strong>29</strong><span class="muted">matchs</span></div><div class="stat"><strong>6</strong><span class="muted">buts</span></div><div class="stat"><strong>11</strong><span class="muted">passes</span></div></div></article></section>`;
-const clubs = `<section class="page-heading"><div class="eyebrow">Clubs</div><h1>Clubs, académies et structures de recrutement</h1><p class="muted">Une base mondiale pour revendiquer une fiche club, publier des besoins et suivre des profils.</p></section><section class="center-feed" style="margin-top:14px"><article class="card club-row"><h3>CODM Meknès</h3><p class="muted">Maroc - Botola Pro - Fiche publique non revendiquée</p><div class="job-strip"><span>Attaquant</span><span>Analyse vidéo</span><span>U23</span></div></article><article class="card club-row"><h3>FC Nantes</h3><p class="muted">France - Ligue 1 - Recrutement jeunes</p><div class="job-strip"><span>Académie</span><span>Gardien</span><span>Scouting</span></div></article></section>`;
-const opportunities = `<section class="page-heading"><div class="eyebrow">Recrutement</div><h1>Opportunités ouvertes</h1><p class="muted">Les clubs, agents et recruteurs publient leurs besoins. Les joueurs peuvent candidater avec profil, vidéo et statistiques.</p></section><section class="center-feed" style="margin-top:14px"><article class="card opp-row"><h3>Recherche attaquant U23 disponible</h3><p class="muted">CODM Meknès - Botola Pro - Avant-centre</p><span class="status">Ouvert</span></article><article class="card opp-row"><h3>Essai gardien senior</h3><p class="muted">Club National 3 - Nantes - Gardien</p><span class="status">Candidatures</span></article></section>`;
-const messages = `<section class="page-heading"><div class="eyebrow">Messagerie</div><h1>Relations, demandes et conversations</h1><p class="muted">Un espace interne pour gérer les contacts entre joueurs, agents, clubs et recruteurs.</p></section><section class="jr-panel" style="margin-top:14px;padding:16px"><div class="message-row"><strong>Responsable recrutement</strong><p class="muted">Le club souhaite consulter le match complet du 12 mai.</p><span class="status">À traiter</span></div><div class="message-row"><strong>Agent vérifié</strong><p class="muted">Proposition de rendez-vous pour discuter du projet sportif.</p><span class="status">Nouveau</span></div></section>`;
+const href = (locale, route = "home") => route === "home" ? `/${locale}` : `/${locale}/${route}`;
 
-export default { async fetch(request) { const path = new URL(request.url).pathname.replace(/\/$/, '') || '/'; const map = {'/': shell('home', home), '/players': shell('players', players), '/clubs': shell('clubs', clubs), '/opportunities': shell('opportunities', opportunities), '/messages': shell('messages', messages)}; const html = (map[path] || map['/']).replace('</head>', '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><style>' + visualRefinement + linkedinRefinement + '</style></head>').replace('<a class="brand-mark" href="/">FN</a>', '<a class="brand-lockup" href="/"><span class="brand-mark">FN</span><span>Football Network</span></a>'); return new Response(html, {headers:{'content-type':'text/html; charset=utf-8','cache-control':'public, max-age=60'}}); } };
+const languageSelect = (locale, route) => `<select class="language-select" aria-label="Language" onchange="window.location.href='/' + this.value + '${route === "home" ? "" : `/${route}`}'">${localeOrder.map(code => `<option value="${code}" ${code === locale ? "selected" : ""}>${i18n[code].label}</option>`).join("")}</select>`;
 
+const leftRail = (locale, tr) => `
+<aside class="left-rail fixed-rail">
+  <section class="profile-card"><div class="profile-cover"></div><div class="profile-body"><div class="profile-photo">FN</div><h2>Football Network</h2><p>${tr.mission}</p></div></section>
+  <section class="panel network-metrics">${tr.metrics.map((label, index) => `<div class="metric-row"><span>${label}</span><strong>${[119,257,38][index]}</strong></div>`).join("")}<div class="metric-cta">${tr.complete}</div></section>
+  <section class="panel followed"><h3>${tr.followed}</h3>${tr.opportunityItems.map((item,index) => `<a class="mini-item ${index === 0 ? "active" : ""}" href="${href(locale,"opportunities")}"><span>${index === 0 ? tr.live : ["15:00","20:00"][index-1]}</span><strong>${["CODM Meknès","FC Nantes","International Academy"][index]}</strong><em>${item}</em></a>`).join("")}</section>
+  <section class="panel side-widget"><h3>${tr.quick}</h3>${tr.quickLinks.map((item,index) => `<a href="${href(locale,[ "profiles","organizations","opportunities"][index])}">${item}</a>`).join("")}</section>
+</aside>`;
+
+const rightRail = (locale, tr) => `
+<aside class="right-rail fixed-rail">
+  <section class="panel football-news"><h3>${tr.newsTitle}</h3><span>${tr.newsSub}</span><div class="news-list">${tr.news.map((item,index) => `<a class="news-item" href="#"><strong>${item}</strong><span>${index + 1} h · ${[1248,864,592,441][index]} ${tr.readers}</span></a>`).join("")}</div></section>
+  <section class="panel ranking"><h3>${tr.profilesTitle}</h3><div class="rank-row"><span>1</span><div><strong>Yanis Benali</strong><em>${tr.roles[0]}</em></div><b>8.5</b></div><div class="rank-row"><span>2</span><div><strong>Sofia Conti</strong><em>${tr.roles[7]}</em></div><b>8.3</b></div><div class="rank-row"><span>3</span><div><strong>Karim Haddad</strong><em>${tr.roles[3]}</em></div><b>8.1</b></div></section>
+  <section class="panel justrate"><h3>${tr.justrateTitle}</h3><p>${tr.justrateText}</p><button class="primary">${tr.justrateCta}</button></section>
+</aside>`;
+
+const homePage = (locale, tr) => `
+<section class="center-feed">
+  <article class="welcome-card"><div class="welcome-avatar">FN</div><h1>${tr.hello}</h1><p>${tr.purpose}</p><div class="objective-actions"><button>${tr.recruit}</button><button class="secondary">${tr.network}</button></div></article>
+  <article class="composer-card"><div class="composer-line"><div class="avatar">FN</div><button>${tr.startPost}</button></div><div class="composer-actions">${tr.composer.map(label => `<button>${label}</button>`).join("")}</div></article>
+  <div class="feed-sort">${tr.sort}</div><button class="new-posts">${tr.newPosts}</button>
+  <article class="feed-card"><div class="post-author"><div class="avatar">Y</div><div><strong>Yanis Benali</strong><span>${tr.postStatus}</span></div></div><p>${tr.postText}</p><div class="performance-strip"><div class="performance-player"><div class="performance-mark">JR</div><div><strong>${tr.connected}</strong><span>24 ${tr.statLabels[0]} · 14 ${tr.statLabels[1]} · 5 ${tr.statLabels[2]}</span></div></div><div class="performance-score"><strong>8.3</strong><span>${tr.jri}</span></div></div><div class="football-media"><div><span>${tr.featured}</span><strong>${tr.keyActions}</strong></div></div><div class="post-actions">${tr.actions.map(label => `<button>${label}</button>`).join("")}</div></article>
+  <article class="feed-card"><div class="post-author"><div class="avatar">C</div><div><strong>CODM Meknès</strong><span>${tr.clubStatus}</span></div></div><p>${tr.clubPost}</p><div class="tag-row"><span class="tag">${tr.roles[0]}</span><span class="tag">Botola Pro</span><span class="tag">${tr.open}</span></div></article>
+</section>`;
+
+const profilesData = [
+  ["Yanis Benali",0,"Lyon, France","8.5"],
+  ["Sofia Conti",7,"Milano, Italia","8.3"],
+  ["Karim Haddad",3,"Casablanca, Maroc","8.1"],
+  ["Anna Müller",5,"Köln, Deutschland","8.0"],
+  ["João Pereira",2,"Porto, Portugal","7.9"],
+  ["Mehmet Kaya",11,"İstanbul, Türkiye","7.8"]
+];
+
+const profilesPage = (locale, tr) => `<div class="page-tools"><input placeholder="${tr.filter}"><button>${tr.newProfile}</button></div><section class="page-heading"><h1>${tr.profilesTitle}</h1><p class="muted">${tr.profilesIntro}</p></section><section class="profile-grid">${profilesData.map(([name,role,place,score],index) => `<article class="profile-card"><div class="profile-card-head"><div class="avatar">${name[0]}</div><span class="tag">${index % 2 ? tr.fresh : tr.open}</span></div><h3>${name}</h3><p class="muted">${tr.roles[role]} · ${place}</p><div class="tag-row"><span class="tag">${tr.roles[role]}</span><span class="tag">JRI ${score}</span></div></article>`).join("")}</section>`;
+
+const organizationsPage = (locale, tr) => `<section class="page-heading"><h1>${tr.organizationsTitle}</h1><p class="muted">${tr.organizationsIntro}</p></section><section class="panel list-card" style="margin-top:11px"><article class="list-row"><h3>CODM Meknès</h3><p class="muted">Club · Botola Pro · Meknès</p><div class="tag-row"><span class="tag">${tr.roles[10]}</span><span class="tag">${tr.roles[11]}</span><span class="tag">${tr.roles[8]}</span></div></article><article class="list-row"><h3>FC Nantes</h3><p class="muted">Club · Ligue 1 · Nantes</p><div class="tag-row"><span class="tag">${tr.roles[1]}</span><span class="tag">${tr.roles[4]}</span><span class="tag">${tr.roles[12]}</span></div></article><article class="list-row"><h3>International Football Academy</h3><p class="muted">Academy · Global</p><div class="tag-row"><span class="tag">${tr.roles[2]}</span><span class="tag">${tr.roles[3]}</span><span class="tag">${tr.roles[14]}</span></div></article></section>`;
+
+const opportunitiesPage = (locale, tr) => `<section class="page-heading"><h1>${tr.opportunitiesTitle}</h1><p class="muted">${tr.opportunitiesIntro}</p></section><section class="panel list-card" style="margin-top:11px"><article class="list-row"><h3>${tr.opportunityItems[0]}</h3><p class="muted">CODM Meknès · Botola Pro</p><span class="status">${tr.open}</span></article><article class="list-row"><h3>${tr.opportunityItems[1]}</h3><p class="muted">FC Nantes · France</p><span class="status">${tr.applications}</span></article><article class="list-row"><h3>${tr.roles[3]} · First team</h3><p class="muted">International club · Europe</p><span class="status">${tr.fresh}</span></article><article class="list-row"><h3>${tr.roles[12]} · Football brand</h3><p class="muted">Remote · Global</p><span class="status">${tr.open}</span></article></section>`;
+
+const messagesPage = (locale, tr) => `<section class="page-heading"><h1>${tr.messagesTitle}</h1><p class="muted">${tr.messagesIntro}</p></section><section class="panel list-card" style="margin-top:11px"><article class="list-row"><h3>${tr.roles[8]} · FC Nantes</h3><p class="muted">${tr.clubPost}</p><span class="status">${tr.toHandle}</span></article><article class="list-row"><h3>${tr.roles[9]} · Verified</h3><p class="muted">${tr.justrateText}</p><span class="status">${tr.fresh}</span></article></section>`;
+
+const pageRenderers = {home:homePage,profiles:profilesPage,organizations:organizationsPage,opportunities:opportunitiesPage,messages:messagesPage};
+
+const render = (request, locale, route) => {
+  const tr = i18n[locale];
+  const url = new URL(request.url);
+  const suffix = route === "home" ? "" : `/${route}`;
+  const alternates = localeOrder.map(code => `<link rel="alternate" hreflang="${code}" href="${url.origin}/${code}${suffix}">`).join("");
+  const nav = tr.nav.map((label,index) => `<a class="${route === navRoutes[index] ? "active" : ""}" href="${href(locale,navRoutes[index])}">${label}</a>`).join("");
+  const main = pageRenderers[route](locale,tr);
+  return `<!doctype html><html lang="${locale}" dir="${tr.dir}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Football Network · ${tr.nav[navRoutes.indexOf(route)]}</title><meta name="description" content="${tr.mission}"><link rel="canonical" href="${url.origin}${href(locale,route)}">${alternates}<link rel="alternate" hreflang="x-default" href="${url.origin}/en${suffix}"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet"><style>${css}</style></head><body><div class="shell"><header class="network-topbar"><a class="brand-lockup" href="${href(locale)}"><span class="brand-mark">FN</span><span>Football Network</span></a><div class="global-search"><input placeholder="${tr.search}" aria-label="${tr.search}"></div><nav class="top-nav">${nav}</nav><div class="top-actions">${languageSelect(locale,route)}<button>${tr.notifications}</button><button>${tr.you}</button></div></header><div class="layout-frame">${leftRail(locale,tr)}<main class="center-scroll"><div class="app-status"><strong>Football Network</strong><span>${tr.bridge}</span></div>${main}</main>${rightRail(locale,tr)}</div></div></body></html>`;
+};
+
+const detectLocale = request => {
+  const header = request.headers.get("accept-language") || "";
+  const candidates = header.split(",").map(item => item.split(";")[0].trim().toLowerCase().split("-")[0]);
+  return candidates.find(code => localeOrder.includes(code)) || "fr";
+};
+
+export default {
+  async fetch(request) {
+    const url = new URL(request.url);
+    const parts = url.pathname.split("/").filter(Boolean);
+    const legacyRoutes = {players:"profiles",clubs:"organizations",opportunities:"opportunities",messages:"messages"};
+    if (!parts.length) return Response.redirect(new URL(`/${detectLocale(request)}`,url),302);
+    if (!localeOrder.includes(parts[0])) {
+      const route = legacyRoutes[parts[0]] || "";
+      return Response.redirect(new URL(`/${detectLocale(request)}${route ? `/${route}` : ""}`,url),302);
+    }
+    const locale = parts[0];
+    const requested = legacyRoutes[parts[1]] || parts[1] || "home";
+    const route = routeNames.includes(requested) ? requested : "home";
+    return new Response(render(request,locale,route),{headers:{"content-type":"text/html; charset=utf-8","cache-control":"public, max-age=60"}});
+  }
+};
