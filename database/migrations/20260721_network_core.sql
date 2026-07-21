@@ -1,4 +1,4 @@
--- Football Network: protected contact access, plan entitlements and JustRate linking.
+-- Football Network: protected contacts, plan entitlements and JustRate API link metadata.
 -- Additive migration. Run after schema.sql and 20260721_multilingual_foundation.sql.
 
 create table if not exists plan_entitlements (
@@ -69,18 +69,17 @@ create table if not exists justrate_profile_links (
   reviewed_by_user_id uuid,
   requested_at timestamptz not null default now(),
   reviewed_at timestamptz,
-  last_synced_at timestamptz,
-  sync_status text not null default 'not_started' check (sync_status in ('not_started', 'ready', 'syncing', 'synced', 'error')),
-  public_snapshot jsonb not null default '{}'::jsonb,
+  last_api_check_at timestamptz,
+  api_status text not null default 'not_checked' check (api_status in ('not_checked', 'ready', 'checking', 'available', 'error')),
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
 
-create table if not exists justrate_sync_events (
+create table if not exists justrate_api_events (
   id uuid primary key default uuid_generate_v4(),
   link_id uuid not null references justrate_profile_links(id) on delete cascade,
   status text not null check (status in ('started', 'completed', 'failed')),
-  snapshot_version text,
+  remote_version text,
   error_code text,
   created_at timestamptz not null default now()
 );
@@ -97,14 +96,14 @@ create index if not exists idx_contact_access_viewer_created
 create index if not exists idx_justrate_links_status
   on justrate_profile_links(status);
 
-create index if not exists idx_justrate_sync_link_created
-  on justrate_sync_events(link_id, created_at desc);
+create index if not exists idx_justrate_api_link_created
+  on justrate_api_events(link_id, created_at desc);
 
 alter table profile_contact_settings enable row level security;
 alter table profile_contacts enable row level security;
 alter table contact_access_events enable row level security;
 alter table justrate_profile_links enable row level security;
-alter table justrate_sync_events enable row level security;
+alter table justrate_api_events enable row level security;
 alter table plan_entitlements enable row level security;
 
 drop policy if exists "Plan entitlements are readable" on plan_entitlements;
@@ -199,12 +198,12 @@ create policy "Owners update pending JustRate links"
     )
   );
 
-drop policy if exists "Verified JustRate sync events are readable" on justrate_sync_events;
-create policy "Verified JustRate sync events are readable"
-  on justrate_sync_events for select
+drop policy if exists "JustRate API events are readable" on justrate_api_events;
+create policy "JustRate API events are readable"
+  on justrate_api_events for select
   using (exists (
     select 1 from justrate_profile_links link
-    where link.id = justrate_sync_events.link_id
+    where link.id = justrate_api_events.link_id
       and (
         link.status = 'verified'
         or exists (

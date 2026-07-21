@@ -4,7 +4,7 @@ Réseau professionnel mondial destiné à tous les acteurs du football : sportif
 
 ## Vision produit
 
-Football Network permet de créer une identité professionnelle, développer son réseau, publier, découvrir des opportunités et prendre contact dans un cadre fiable. Un profil peut être relié à une identité JustRate vérifiée afin d’afficher des statistiques sportives autorisées.
+Football Network permet de créer une identité professionnelle, développer son réseau, publier, découvrir des opportunités et prendre contact dans un cadre fiable. Un profil peut être relié à une identité JustRate vérifiée afin d’afficher, via l’API de l’application JustRate hébergée sur Render, des statistiques sportives autorisées. Les deux plateformes et leurs bases restent indépendantes.
 
 La stratégie détaillée est documentée dans `docs/PRODUCT_STRATEGY.md`.
 

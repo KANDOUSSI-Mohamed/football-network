@@ -11,7 +11,7 @@ La promesse centrale est simple : être trouvé, prouver sa valeur et entrer en 
 1. **Tous les métiers comptent.** Joueurs, entraîneurs, analystes, recruteurs, agents, dirigeants, staff médical, administratif, logistique, marketing et médias partagent le même socle de profil.
 2. **Le réseau précède la donnée sportive.** Le profil, la recherche, la relation et la messagerie forment le cœur de Football Network.
 3. **La confidentialité est contrôlée par le membre.** Premium autorise une demande d’accès ; il ne supprime jamais le consentement du propriétaire du profil.
-4. **JustRate enrichit, mais ne remplace pas le profil.** Les statistiques ne remontent qu’après validation de l’identité sportive.
+4. **JustRate reste indépendant.** JustRate est déployé sur Render et conserve sa propre base. Football Network consulte uniquement son API après validation de l’identité sportive.
 5. **Le produit est mondial dès sa conception.** Interface, contenus et données sont localisables sans créer de versions séparées du site.
 6. **Un layout stable.** Toutes les pages conservent la navigation supérieure et les deux colonnes fixes ; seule la colonne centrale défile.
 
@@ -54,8 +54,8 @@ Les prix seront fixés après mesure de l’usage et validation des parcours, pa
 1. Le membre propose son identifiant ou son URL JustRate.
 2. Football Network crée une demande en statut `pending`.
 3. Un contrôle compare l’identité, le club, la date de naissance et les éléments de preuve disponibles.
-4. Une fois le lien `verified`, seules les données publiques autorisées sont synchronisées.
-5. Chaque synchronisation est versionnée et peut être révoquée.
+4. Une fois le lien `verified`, Football Network interroge l’API JustRate sécurisée pour afficher les données autorisées.
+5. Aucune lecture directe ni fusion des bases n’est autorisée ; Football Network conserve seulement l’identifiant externe, le statut de vérification et l’historique technique des appels.
 
 ## Feuille de route
 
@@ -79,8 +79,8 @@ Les prix seront fixés après mesure de l’usage et validation des parcours, pa
 
 - revendication d’identité ;
 - validation opérateur ;
-- synchronisation des matchs, statistiques et JRI ;
-- historique et gestion des erreurs de rapprochement.
+- lecture des matchs, statistiques et JRI via l’API JustRate hébergée sur Render ;
+- historique des vérifications et gestion des erreurs de rapprochement, sans copie de la base JustRate.
 
 ### Phase 4 - Marché professionnel
 
