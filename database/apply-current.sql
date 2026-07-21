@@ -2,7 +2,6 @@
 -- Le schema initial doit deja etre present.
 -- Ce fichier est genere a partir des migrations versionnees.
 
-begin;
 
 -- ============================================================
 -- 20260721_multilingual_foundation.sql
@@ -716,7 +715,7 @@ begin
     raise exception 'invalid_professional_role';
   end if;
 
-  if not exists (select 1 from supported_locales sl where sl.code = safe_locale and sl.is_active) then
+  if not exists (select 1 from supported_locales sl where sl.code = safe_locale and sl.is_enabled) then
     safe_locale := 'fr';
   end if;
 
@@ -910,5 +909,23 @@ revoke all on function respond_to_connection(uuid, text) from public;
 grant execute on function create_member_profile(text, text, text, text, text, text, text) to authenticated;
 grant execute on function request_connection(uuid) to authenticated;
 grant execute on function respond_to_connection(uuid, text) to authenticated;
+
+
+-- ============================================================
+-- 20260721_reference_access.sql
+-- ============================================================
+
+-- Football Network: public read access for active reference data.
+
+begin;
+
+alter table supported_locales enable row level security;
+
+drop policy if exists "Active locales are readable" on supported_locales;
+create policy "Active locales are readable"
+  on supported_locales for select
+  using (is_enabled);
+
+grant select on supported_locales to anon, authenticated;
 
 commit;

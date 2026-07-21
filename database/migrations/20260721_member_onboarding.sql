@@ -155,7 +155,7 @@ begin
     raise exception 'invalid_professional_role';
   end if;
 
-  if not exists (select 1 from supported_locales sl where sl.code = safe_locale and sl.is_active) then
+  if not exists (select 1 from supported_locales sl where sl.code = safe_locale and sl.is_enabled) then
     safe_locale := 'fr';
   end if;
 
