@@ -1,4 +1,95 @@
-﻿const css = `
+﻿const visualRefinement = `
+:root{--bg:#06070b;--surface:#0d1017;--surface2:#111621;--ink:#f3f6f0;--soft:#d7ddd4;--muted:#8e99a9;--faint:#667184;--line:#232936;--line2:#191f2a;--accent:#a8df2d;--accent-soft:#95c929;--green:#32c46a}
+html,body{font-family:"Inter","Segoe UI Variable","Segoe UI",Arial,sans-serif;font-size:13px;line-height:1.5;font-weight:400;letter-spacing:0;background:var(--bg)}
+button,input,select{letter-spacing:0}
+.shell{background:var(--bg)}
+.network-topbar{height:58px;grid-template-columns:178px minmax(220px,320px) 1fr auto;gap:16px;padding:0 max(22px,calc((100vw - 1400px)/2));background:rgba(7,8,13,.97);border-bottom-color:#1a202b;box-shadow:0 8px 28px rgba(0,0,0,.18)}
+.brand-lockup{display:flex;align-items:center;gap:9px;color:#f5f7f2;font-size:13px;font-weight:650;white-space:nowrap}
+.brand-mark{width:32px;height:32px;border-radius:7px;background:#101720;border-color:#35511d;font-size:13px;font-weight:700}
+.global-search input{height:36px;border-radius:7px;border-color:#202733;background:#0d111a;padding:8px 12px;font-size:12px}
+.global-search input:focus{border-color:#587a26;box-shadow:0 0 0 3px rgba(168,223,45,.08)}
+.top-nav{height:58px;gap:2px;align-items:stretch}
+.top-nav a{position:relative;display:flex;align-items:center;justify-content:center;min-width:72px;padding:0 10px;border:0;color:#8995a6;font-size:11.5px;font-weight:500}
+.top-nav a:after{content:"";position:absolute;left:20%;right:20%;bottom:0;height:2px;border-radius:2px 2px 0 0;background:transparent}
+.top-nav a.active,.top-nav a:hover{border:0;color:#eef3e9}
+.top-nav a.active:after{background:var(--accent)}
+.top-actions{gap:6px}
+.top-actions button{padding:7px 10px;border-radius:7px;background:#0d111a;border-color:#202733;color:#aab3c0;font-size:11.5px;font-weight:500}
+.layout-frame{height:calc(100vh - 58px);max-width:1440px;padding:16px 20px;grid-template-columns:292px minmax(580px,1fr) 318px;gap:14px}
+.fixed-rail{max-height:calc(100vh - 90px)}
+.left-rail,.right-rail,.center-feed{gap:11px}
+.center-scroll{padding-right:5px}
+.jr-panel,.jr-score-card,.feed-card,.composer-card,.card{background:var(--surface);border-color:var(--line2);border-radius:7px;box-shadow:0 1px 0 rgba(255,255,255,.015)}
+.app-status{margin:0 1px 9px;font-size:10.5px;font-weight:500;color:#707c8f}
+.app-status strong{font-size:11px;font-weight:600;color:#cfd6cd}
+.profile-cover{height:58px}
+.profile-body{gap:5px;padding:0 14px 13px}
+.profile-photo{width:60px;height:60px;margin-top:-30px;font-size:13px}
+.profile-body h2{font-size:14px;font-weight:600}
+.profile-body p,.muted{font-size:11.5px}
+.profile-stats{gap:5px;margin-top:7px;padding-top:9px}
+.profile-stats span{font-size:11px;font-weight:450}
+.profile-stats strong{font-weight:600}
+.side-widget{gap:8px;padding:13px}
+.side-widget h3{font-size:13.5px;font-weight:600}
+.side-widget a{font-size:11.5px;font-weight:400}
+.side-widget strong{font-weight:550}
+.widget-tabs{gap:6px;padding:9px}
+.widget-tabs button,.composer-actions button,.button{min-height:33px;padding:7px 9px;border-radius:6px;border-color:#283143;background:#111722;color:#9ca7b6;font-size:11.5px;font-weight:550}
+.widget-tabs button.active{background:rgba(168,223,45,.1);border-color:rgba(168,223,45,.34);color:#c5eb72}
+.button.primary{background:#1a2a14;border-color:#496827;color:#c7eb78}
+.match-list-widget h3,.ranking-widget h3{margin:7px 12px;color:#778397;font-size:9.5px;font-weight:650;letter-spacing:0}
+.mini-match{gap:2px;padding:8px 12px;font-size:11.5px}
+.mini-match.active{background:rgba(57,108,219,.07);border-left:2px solid #3d69ca;padding-left:10px}
+.mini-match span{font-size:9.5px}
+.mini-match strong{font-size:11.5px;font-weight:600}
+.mini-match em{font-size:11px}
+.ranking-widget{padding:10px}
+.talent-card{grid-template-columns:36px 1fr auto;gap:8px;padding:9px;margin-bottom:11px}
+.avatar{width:34px;height:34px;font-size:11px;font-weight:650}
+.talent-card strong{font-size:12.5px;font-weight:600}
+.talent-card span,.rank-row em{font-size:10.5px}
+.rank-row{grid-template-columns:20px 1fr auto;gap:8px;padding:8px 3px}
+.rank-row strong{font-size:11.5px;font-weight:600}
+.justrate-sync{padding:13px}
+.justrate-sync h3{margin-bottom:8px;font-size:14px;font-weight:600}
+.justrate-sync p{font-size:11.5px}
+.justrate-sync button{padding:9px;font-size:11.5px;font-weight:650}
+.jr-score-card{padding:20px 26px}
+.score-meta{font-size:9.5px;font-weight:600;letter-spacing:0}
+.score-board{grid-template-columns:1fr 132px 1fr;gap:16px;margin:16px 0}
+.club-badge{width:54px;height:54px;margin-bottom:7px;border-radius:12px;font-size:13px}
+.team-side strong{font-size:13.5px;font-weight:600}
+.team-side span{font-size:11px}
+.main-score span{font-size:9.5px;letter-spacing:0}
+.main-score strong{font-size:48px;font-weight:650}
+.main-score em{font-size:10px}
+.score-details{gap:6px}
+.score-details span,.tag{padding:4px 7px;font-size:10.5px;font-weight:450}
+.composer-card{padding:11px}
+.composer-line{grid-template-columns:34px 1fr;gap:9px}
+.composer-line button{padding:9px 13px;border-radius:7px;font-size:11.5px}
+.composer-actions{gap:6px;margin-top:9px}
+.composer-actions button{background:#101720;color:#9aa5b5}
+.feed-card{padding:13px}
+.post-author{grid-template-columns:36px 1fr;gap:9px}
+.post-author strong{font-size:12px;font-weight:600}
+.post-author span{font-size:10.5px}
+.feed-card p{margin:12px 0;font-size:12.5px;line-height:1.6}
+.football-media{height:230px;padding:18px;margin:11px 0}
+.football-media strong{font-size:17px;font-weight:600}
+.football-media span{font-size:9.5px;letter-spacing:0}
+.post-actions{gap:6px;padding-top:9px}
+.post-actions button{padding:5px;font-size:11px;font-weight:500}
+.job-strip span{padding:5px 8px;font-size:10.5px;font-weight:500}
+.page-heading h1{font-size:20px;font-weight:600}
+.eyebrow{font-size:9.5px;letter-spacing:0}
+.card h3{font-size:13.5px;font-weight:600}
+@media(max-width:1250px){.network-topbar{grid-template-columns:42px minmax(220px,1fr) auto;height:auto;padding-top:8px}.brand-lockup>span:last-child{display:none}.top-nav{grid-column:1/-1;order:4;height:42px;overflow:auto}.layout-frame{height:calc(100vh - 108px);grid-template-columns:260px minmax(520px,1fr) 285px}.fixed-rail{max-height:calc(100vh - 138px)}}
+@media(max-width:1100px){.network-topbar{grid-template-columns:42px 1fr auto;padding:10px 12px}.layout-frame{height:auto;grid-template-columns:1fr}.brand-lockup{grid-column:1}.global-search{grid-column:2}.top-actions{grid-column:3}.top-nav{grid-column:1/-1}.score-board{grid-template-columns:1fr}.fixed-rail{display:none}}
+`;
+
+const css = `
 :root{--bg:#07070d;--surface:#10111b;--surface2:#151827;--ink:#eef3e8;--soft:#d9e2d3;--muted:#9aa6bb;--faint:#6f7b91;--line:#24283a;--line2:#1b2030;--accent:#a8e600;--accent-soft:#8fd600;--green:#32d66f;--blue:#2d6cff;--gold:#ffc247;--danger:#ff5b64}
 *{box-sizing:border-box}
 html,body{margin:0;height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;font-size:14px;line-height:1.45;font-weight:400;text-rendering:geometricPrecision;-webkit-font-smoothing:antialiased}
@@ -12,5 +103,5 @@ const clubs = `<section class="page-heading"><div class="eyebrow">Clubs</div><h1
 const opportunities = `<section class="page-heading"><div class="eyebrow">Recrutement</div><h1>Opportunités ouvertes</h1><p class="muted">Les clubs, agents et recruteurs publient leurs besoins. Les joueurs peuvent candidater avec profil, vidéo et statistiques.</p></section><section class="center-feed" style="margin-top:14px"><article class="card opp-row"><h3>Recherche attaquant U23 disponible</h3><p class="muted">CODM Meknès - Botola Pro - Avant-centre</p><span class="status">Ouvert</span></article><article class="card opp-row"><h3>Essai gardien senior</h3><p class="muted">Club National 3 - Nantes - Gardien</p><span class="status">Candidatures</span></article></section>`;
 const messages = `<section class="page-heading"><div class="eyebrow">Messagerie</div><h1>Relations, demandes et conversations</h1><p class="muted">Un espace interne pour gérer les contacts entre joueurs, agents, clubs et recruteurs.</p></section><section class="jr-panel" style="margin-top:14px;padding:16px"><div class="message-row"><strong>Responsable recrutement</strong><p class="muted">Le club souhaite consulter le match complet du 12 mai.</p><span class="status">À traiter</span></div><div class="message-row"><strong>Agent vérifié</strong><p class="muted">Proposition de rendez-vous pour discuter du projet sportif.</p><span class="status">Nouveau</span></div></section>`;
 
-export default { async fetch(request) { const path = new URL(request.url).pathname.replace(/\/$/, '') || '/'; const map = {'/': shell('home', home), '/players': shell('players', players), '/clubs': shell('clubs', clubs), '/opportunities': shell('opportunities', opportunities), '/messages': shell('messages', messages)}; return new Response(map[path] || map['/'], {headers:{'content-type':'text/html; charset=utf-8','cache-control':'public, max-age=60'}}); } };
+export default { async fetch(request) { const path = new URL(request.url).pathname.replace(/\/$/, '') || '/'; const map = {'/': shell('home', home), '/players': shell('players', players), '/clubs': shell('clubs', clubs), '/opportunities': shell('opportunities', opportunities), '/messages': shell('messages', messages)}; const html = (map[path] || map['/']).replace('</head>', '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><style>' + visualRefinement + '</style></head>').replace('<a class="brand-mark" href="/">FN</a>', '<a class="brand-lockup" href="/"><span class="brand-mark">FN</span><span>Football Network</span></a>'); return new Response(html, {headers:{'content-type':'text/html; charset=utf-8','cache-control':'public, max-age=60'}}); } };
 
