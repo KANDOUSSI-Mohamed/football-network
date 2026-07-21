@@ -1,42 +1,36 @@
-# Football Network
+﻿# Football Network
 
-Plateforme professionnelle mondiale dediee au football.
+RÃ©seau professionnel mondial destinÃ© Ã  tous les acteurs du football : sportifs, staffs, recruteurs, agents, dirigeants, mÃ©tiers mÃ©dicaux, administratifs, logistiques, marketing et mÃ©dias.
 
-## Stack proposee
+## Vision produit
 
-- Frontend / application : Next.js + TypeScript
-- Base de donnees : Supabase PostgreSQL
-- Authentification : Supabase Auth
-- Stockage medias : Supabase Storage
-- Messagerie : tables PostgreSQL + temps reel Supabase plus tard
-- Paiement premium : Stripe plus tard
+Football Network permet de crÃ©er une identitÃ© professionnelle, dÃ©velopper son rÃ©seau, publier, dÃ©couvrir des opportunitÃ©s et prendre contact dans un cadre fiable. Un profil peut Ãªtre reliÃ© Ã  une identitÃ© JustRate vÃ©rifiÃ©e afin dâ€™afficher des statistiques sportives autorisÃ©es.
 
-## Pourquoi Supabase pour commencer
+La stratÃ©gie dÃ©taillÃ©e est documentÃ©e dans `docs/PRODUCT_STRATEGY.md`.
 
-Supabase permet de demarrer vite avec :
+## Stack
 
-- une vraie base PostgreSQL ;
-- des comptes utilisateurs ;
-- des droits d'acces ;
-- du stockage pour photos, videos et documents ;
-- une API automatique ;
-- une evolution possible vers une architecture plus grande.
+- application : Next.js et TypeScript ;
+- base de donnÃ©es : Supabase PostgreSQL ;
+- authentification : Supabase Auth ;
+- mÃ©dias : Supabase Storage ;
+- temps rÃ©el : Supabase Realtime ;
+- paiement : Stripe lors de lâ€™activation commerciale.
 
-## Dossiers
+## Internationalisation
 
-- `database/schema.sql` : premier schema de base de donnees.
-- `database/seed.sql` : premieres donnees de test France / Maroc.
-- `database/seed-demo.sql` : donnees demo pour alimenter les ecrans MVP.
-- `docs/technical-decisions.md` : choix techniques initiaux.
+Le produit prend en charge dÃ¨s sa fondation : franÃ§ais, anglais, espagnol, italien, portugais, allemand, nÃ©erlandais, arabe et turc. Les routes, libellÃ©s, contenus Ã©ditoriaux et rÃ´les professionnels sont localisables.
 
-## Lancement vise
+## Structure utile
 
-Le MVP doit d'abord permettre :
+- `database/schema.sql` : schÃ©ma initial ;
+- `database/migrations/20260721_multilingual_foundation.sql` : langues, contenus traduits et rÃ´les professionnels ;
+- `database/migrations/20260721_network_core.sql` : coordonnÃ©es protÃ©gÃ©es, droits Premium et lien JustRate ;
+- `database/seed.sql` : premiÃ¨res donnÃ©es France et Maroc ;
+- `database/seed-demo.sql` : donnÃ©es de dÃ©monstration ;
+- `docs/PRODUCT_STRATEGY.md` : stratÃ©gie et feuille de route ;
+- `docs/technical-decisions.md` : dÃ©cisions techniques initiales.
 
-- creation d'un profil joueur ;
-- consultation de profils joueurs ;
-- recherche simple ;
-- pages clubs ;
-- demandes de relation ;
-- messagerie basique ;
-- opportunites de recrutement.
+## PrioritÃ© MVP
+
+Le parcours de rÃ©fÃ©rence est : dÃ©couvrir un profil, comprendre son expÃ©rience, demander une relation, Ã©changer par messagerie puis accÃ©der aux coordonnÃ©es uniquement lorsque le membre lâ€™autorise et que les droits requis sont prÃ©sents.
