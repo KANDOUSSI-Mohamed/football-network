@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "data:places": "node scripts/import-geonames-postal.mjs",
+    "db:migrate": "node scripts/apply-supabase-migration.mjs",
+    "data:verify": "node scripts/verify-global-data.mjs",
+    "sites:verify": "node scripts/verify-sites-worker.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.105.4",
@@ -18,7 +22,11 @@
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
+    "fflate": "^0.8.3",
     "typescript": "latest"
+  },
+  "overrides": {
+    "postcss": "8.5.22",
+    "sharp": "0.35.3"
   }
 }
-
