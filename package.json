@@ -10,7 +10,9 @@
     "data:places": "node scripts/import-geonames-postal.mjs",
     "db:migrate": "node scripts/apply-supabase-migration.mjs",
     "data:verify": "node scripts/verify-global-data.mjs",
-    "sites:verify": "node scripts/verify-sites-worker.mjs"
+    "sites:verify": "node scripts/verify-sites-worker.mjs",
+    "data:clubs": "node scripts/import-wikidata-clubs.mjs",
+    "sites:build": "node scripts/build-sites-worker.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.105.4",
