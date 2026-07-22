@@ -16,11 +16,14 @@ Every external club identity is stored in `club_external_ids`. Every run is reco
 $env:SUPABASE_ACCESS_TOKEN="..."
 npm run db:migrate -- database/migrations/20260722_wikidata_club_catalogue.sql
 npm run data:clubs -- FR MA
+npm run data:clubs:expansion
 npm run data:verify
 node scripts/verify-club-catalogue.mjs
 ```
 
 Use `--dry-run`, `--limit N` and `--page-size N` to test extraction without writing to Supabase. The importer is idempotent: a second run matches the external IDs and enriches empty fields instead of creating duplicates.
+
+The expansion command covers Spain, Germany, Italy, the United Kingdom, Portugal, the Netherlands, Belgium, Senegal, Algeria, Tunisia, Cote d'Ivoire and Cameroon. United Kingdom extraction includes England, Scotland, Wales and Northern Ireland entities, while all resulting records retain the ISO country code `GB` in Football Network.
 
 ## Scale strategy
 

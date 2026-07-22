@@ -58,11 +58,13 @@ async function fetchWithRetry(url, options = {}, attempts = 6) {
   throw lastError;
 }
 
-function clubIdsQuery(countryEntityId, limit, offset) {
+function clubIdsQuery(countryEntityIds, limit, offset) {
+  const countryValues = countryEntityIds.map((entityId) => `wd:${entityId}`).join(" ");
   return `
-SELECT ?club WHERE {
+SELECT DISTINCT ?club WHERE {
+  VALUES ?country { ${countryValues} }
   ?club wdt:P31 wd:Q476028;
-        wdt:P17 wd:${countryEntityId}.
+        wdt:P17 ?country.
 }
 ORDER BY ?club
 LIMIT ${limit}
@@ -86,13 +88,28 @@ async function getCountryName(countryCode) {
   return new Intl.DisplayNames(["fr"], { type: "region" }).of(countryCode) || countryCode;
 }
 
-async function resolveCountryEntityId(countryCode) {
-  const known = { FR: "Q142", MA: "Q1028" };
+async function resolveCountryEntityIds(countryCode) {
+  const known = {
+    BE: ["Q31"],
+    CM: ["Q1009"],
+    CI: ["Q1008"],
+    DE: ["Q183"],
+    DZ: ["Q262"],
+    ES: ["Q29"],
+    FR: ["Q142"],
+    GB: ["Q145", "Q21", "Q22", "Q25", "Q26"],
+    IT: ["Q38"],
+    MA: ["Q1028"],
+    NL: ["Q55"],
+    PT: ["Q45"],
+    SN: ["Q1041"],
+    TN: ["Q948"],
+  };
   if (known[countryCode]) return known[countryCode];
   const data = await queryWikidata(`SELECT ?country WHERE { ?country wdt:P297 "${countryCode}". } LIMIT 1`);
   const id = value(data.results?.bindings?.[0], "country").match(/Q[0-9]+$/)?.[0];
   if (!id) throw new Error(`Wikidata country not found: ${countryCode}`);
-  return id;
+  return [id];
 }
 
 function value(binding, key) {
@@ -197,11 +214,11 @@ async function loadClubRecords(entityIds) {
 
 async function fetchCountryClubs(countryCode, options) {
   const records = new Map();
-  const countryEntityId = await resolveCountryEntityId(countryCode);
+  const countryEntityIds = await resolveCountryEntityIds(countryCode);
   let offset = 0;
   while (records.size < options.limit) {
     const requested = Math.min(options.pageSize, options.limit - records.size);
-    const idData = await queryWikidata(clubIdsQuery(countryEntityId, requested, offset));
+    const idData = await queryWikidata(clubIdsQuery(countryEntityIds, requested, offset));
     const entityIds = (idData.results?.bindings || [])
       .map((binding) => value(binding, "club").match(/Q[0-9]+$/)?.[0])
       .filter(Boolean);
