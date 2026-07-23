@@ -13,7 +13,8 @@
     "sites:verify": "node scripts/verify-sites-worker.mjs",
     "data:clubs": "node scripts/import-wikidata-clubs.mjs",
     "data:clubs:expansion": "node scripts/import-wikidata-clubs.mjs ES DE IT GB PT NL BE SN DZ TN CI CM",
-    "sites:build": "node scripts/build-sites-worker.mjs"
+    "sites:build": "node scripts/build-sites-worker.mjs",
+    "onboarding:verify": "node scripts/verify-onboarding-privacy.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.105.4",

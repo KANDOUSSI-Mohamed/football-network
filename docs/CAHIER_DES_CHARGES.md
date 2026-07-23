@@ -56,13 +56,17 @@ Créer le premier graphe professionnel mondial exclusivement dédié au football
 - annuaire public de 13 036 clubs traçables dans 14 pays ;
 - 52 914 localités et codes postaux déjà chargés pour la France et le Maroc ;
 - imports GeoNames et Wikidata avec provenance, déduplication et file de contrôle ;
-- liens de source visibles et routes sensibles protégées.
+- liens de source visibles et routes sensibles protégées ;
+- onboarding sécurisé en trois étapes avec consentements versionnés ;
+- identité légale séparée du profil public et protégée par RLS ;
+- confidentialité du profil et de la messagerie pilotable par le membre ;
+- dépôt privé, historique et annulation des demandes de vérification.
 
 ### 3.2 Éléments encore à rendre complets côté utilisateur
 
-- inscription et onboarding final de bout en bout ;
+- reprise d'un onboarding interrompu, parcours tuteur complet et double authentification ;
 - édition complète de tous les types de profils ;
-- dépôt et traitement opérationnel des demandes de vérification ;
+- console opérateur et traitement administratif des demandes de vérification déjà déposables par les membres ;
 - publication réelle de photos, vidéos et documents ;
 - demandes de relation, messagerie et notifications entièrement utilisables ;
 - moteur de recrutement complet avec candidatures et pipeline ;
@@ -693,8 +697,8 @@ Le MVP est considéré exploitable lorsque :
 
 ## 15. Ordre de priorité immédiat
 
-1. Onboarding et profil universel réellement éditable.
-2. Revendication et vérification des clubs et professionnels.
+1. Onboarding, profil universel éditable et confidentialité : socle membre réalisé.
+2. Console de revue, revendication et vérification des clubs et professionnels.
 3. Demandes de relation, messagerie et notifications de bout en bout.
 4. Place de marché de recrutement complète.
 5. Liaison JustRate vérifiée.
