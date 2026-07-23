@@ -14,7 +14,8 @@
     "data:clubs": "node scripts/import-wikidata-clubs.mjs",
     "data:clubs:expansion": "node scripts/import-wikidata-clubs.mjs ES DE IT GB PT NL BE SN DZ TN CI CM",
     "sites:build": "node scripts/build-sites-worker.mjs",
-    "onboarding:verify": "node scripts/verify-onboarding-privacy.mjs"
+    "onboarding:verify": "node scripts/verify-onboarding-privacy.mjs",
+    "admin:verify": "node scripts/verify-admin-verification.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.105.4",
