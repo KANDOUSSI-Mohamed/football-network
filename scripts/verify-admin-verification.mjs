@@ -26,6 +26,7 @@ for (const locale of locales) {
     queue: html.includes("/rest/v1/rpc/get_admin_review_queue"),
     audit: html.includes("/rest/v1/rpc/get_admin_review_audit"),
     privateDocument: html.includes("/storage/v1/object/sign/identity-verification/"),
+    staffNavigation: html.includes("/rest/v1/rpc/is_platform_staff") && html.includes("staff-admin-link"),
     fixedLayout: html.includes("grid-template-columns:260px minmax(590px,1fr) 300px"),
     localized: locale !== "fr" || html.includes("Administration des vérifications"),
     rtl: locale !== "ar" || html.includes('dir="rtl"'),
