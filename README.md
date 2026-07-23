@@ -6,6 +6,7 @@ Réseau professionnel mondial destiné à tous les acteurs du football : sportif
 
 Football Network permet de créer une identité professionnelle, développer son réseau, publier, découvrir des opportunités et prendre contact dans un cadre fiable. Un profil peut être relié à une identité JustRate vérifiée afin d’afficher, via l’API de l’application JustRate hébergée sur Render, des statistiques sportives autorisées. Les deux plateformes et leurs bases restent indépendantes.
 
+Le cahier des charges directeur est documenté dans `docs/CAHIER_DES_CHARGES.md`.
 La stratégie détaillée est documentée dans `docs/PRODUCT_STRATEGY.md`.
 
 ## Stack
@@ -29,6 +30,7 @@ Le produit prend en charge dès sa fondation : français, anglais, espagnol, ita
 - `database/migrations/20260721_member_onboarding.sql` : inscription, propriété des profils et relations sécurisées ;
 - `database/seed.sql` : premières données France et Maroc ;
 - `database/seed-demo.sql` : données de démonstration ;
+- `docs/CAHIER_DES_CHARGES.md` : spécifications fonctionnelles, produit, données, sécurité et feuille de route ;
 - `docs/PRODUCT_STRATEGY.md` : stratégie et feuille de route ;
 - `docs/technical-decisions.md` : décisions techniques initiales.
 
